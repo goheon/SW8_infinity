@@ -1,0 +1,82 @@
+/** order **/
+.order-content .year {
+  display: inline-block;
+  padding: 8px 15px;
+  height: 30px;
+  margin-bottom: 15px;
+  background: #0078ff;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.order-table {
+  table-layout: fixed;
+}
+
+.order-table > table {
+  width: 100%;
+}
+
+.order-table > table th {
+  border-bottom: 1px solid #000;
+  text-align: center;
+  padding: 10px;
+}
+
+.order-table > table td {
+  vertical-align: middle;
+  padding: 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  flex-direction: column;
+}
+
+.product-info img {
+  width: fit-content;
+  height: fit-content;
+}
+
+.product-info .img-box {
+  width: 88px;
+  height: 74px;
+  overflow: hidden;
+}
+
+.product-txt {
+  width: 100%;
+  text-align: center;
+}
+
+.delivery-btn-status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.delivery-reject {
+  background: #cc1e46;
+  color: #fff;
+}
+
+.delivery-reject:hover {
+  color: #ededed;
+}
+
+.delivery-success {
+  background: #5fda90;
+}
+
+.order-imgpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}

@@ -1,0 +1,149 @@
+.mypage-title {
+  text-align: left;
+  font-size: 40px;
+  font-weight: 700 bold;
+}
+
+.profile-img {
+  justify-content: left;
+  float: left;
+  height: 177px;
+  width: 177px;
+  margin: 40px;
+}
+
+.profile-name {
+  font-size: 30px;
+}
+
+.profile-p {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #808080;
+}
+
+.check-box {
+  margin-bottom: 30px;
+  color: #808080;
+}
+
+.input [type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid #999;
+  appearance: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.form-wrap {
+  width: 100%;
+  margin: 50px auto 0;
+  border-top: solid 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.input[type='text'] {
+  width: 640px auto;
+  height: 40px auto;
+  border: 0;
+  background-color: transparent;
+  border-bottom: 1px solid;
+}
+
+.input[type='password'] {
+  width: 640px auto;
+  height: 40px auto;
+  border: 0;
+  background-color: transparent;
+  border-bottom: 1px solid;
+}
+
+.input[type='tel'] {
+  width: 640px auto;
+  height: 40px auto;
+  border: 0;
+  background-color: transparent;
+  border-bottom: 1px solid;
+}
+
+.ad-btn {
+  border: 1.5px solid;
+  background-color: transparent;
+  margin-left: 5px;
+  height: auto;
+  width: auto;
+}
+
+.ad-Number {
+  width: 50%;
+  display: flex;
+}
+
+.ad-input {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: #616161;
+}
+
+.input {
+  height: 32px;
+  font-size: 14px;
+  box-shadow: 0 0 0;
+  border-radius: 0;
+}
+
+.sentence {
+  position: relative;
+  margin-top: 10px;
+}
+
+.sentence .sentence_txt {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.sentence .sentence_txt span {
+  color: #b1b1b1;
+}
+
+.phoneNumber .number_box {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.phoneNumber .number_box .input {
+  width: auto;
+}
+
+.dash {
+  width: 25px;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.edit_btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+.fulladdress.mypage,
+.name-InputBox.mypage {
+  margin-top: 0.75rem;
+}
+
+.mypage-fix {
+  padding: 10px;
+}

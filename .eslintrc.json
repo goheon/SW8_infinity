@@ -1,0 +1,70 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb-base",
+    "eslint-config-prettier",
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "rules": {
+    "no-unused-vars": "error",
+    "no-undef": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "env": {
+        "node": true
+      },
+      "parserOptions": {
+        "ecmaVersion": 2018
+      },
+      "rules": {
+        "spaced-comment": "off"
+      }
+    },
+    {
+      "files": ["views/**/*.js"],
+      "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+      },
+      "rules": {
+        "camelcase": "error",
+        "import/extensions": "off",
+        "no-alert": "off",
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off"
+      },
+      "env": {
+        "browser": true
+      }
+    },
+    {
+      "files": ["!(views)/**/*.js"],
+      "parserOptions": {
+        "ecmaVersion": 2018
+      },
+      "rules": {
+        "func-names": "off"
+      }
+    },
+    {
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "overrides": [
+        {
+          "files": ["*.js", "*.jsx"],
+          "rules": {
+            "@typescript-eslint/explicit-function-return-type": "off"
+          }
+        }
+      ]
+    }
+  ]
+}

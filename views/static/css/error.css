@@ -1,0 +1,22 @@
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: 80vh;
+  max-width: 90%; /* 최대 너비 설정 */
+  margin: 0 auto; /* 가운데 정렬을 위해 좌우 여백을 자동으로 설정 */
+}
+
+.errorImg {
+  height: 50vh;
+  margin-bottom: 20px;
+  max-width: 100%; /* 이미지의 최대 너비를 설정 */
+}
+
+.homeBtn {
+  color: #1976d2;
+  margin-top: 20px;
+  max-width: 100%; /* 버튼의 최대 너비를 설정 */
+}
