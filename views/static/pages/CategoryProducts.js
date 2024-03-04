@@ -5,7 +5,8 @@ import AbstractView from './AbstractView.js';
 export default class extends AbstractView {
   constructor(params) {
     super(params);
-    this.setTitle(Object.values(this.params));
+    this.setTitle('categoryProducts');
+    console.log(this.params);
     // data fetching 후 변경 예정
 
     this.count = 12; // 검색 결과에 따른 count
