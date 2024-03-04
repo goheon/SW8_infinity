@@ -49,10 +49,11 @@ export const product = async () => {
     $totalQuantity.innerHTML = totalQuantity;
     $totalPrice.innerHTML = totalPrice.toLocaleString();
   };
+  await getCartItems(totalCalc);
 
   $addProductBtn.addEventListener('click', async () => {
+    console.log('addProductBtn');
     if ($color.value !== '선택해주세요' && $size.value !== '선택해주세요') {
-      await getCartItems(totalCalc);
       const nextKey = await getNextKey();
       await updateCartItemList({
         color: $color.value,
@@ -62,6 +63,7 @@ export const product = async () => {
         id: nextKey,
         count: 1
       });
+      await getCartItems(totalCalc);
       return;
     }
     alert('선택해주세요');
@@ -69,7 +71,7 @@ export const product = async () => {
   });
   $ulElements.forEach((prod) => {
     prod.addEventListener('click', async (e) => {
-      await getCartItems(totalCalc);
+      console.log('-----------------ulElementsProduct');
 
       const $prodPrice = document.querySelector('.price');
       const $quantity = prod.querySelector('.quantity');
@@ -89,7 +91,8 @@ export const product = async () => {
       if (e.target.id === 'decrease') {
         const product = await getCartItemByKey(parseInt(prod.id));
         if (product.count <= 0) {
-          await removeItemFromCart(parseInt(prod.id));
+          const temp = await removeItemFromCart(parseInt(prod.id));
+          console.log(temp);
           prod.remove();
           return;
         }
@@ -100,10 +103,12 @@ export const product = async () => {
         ).toLocaleString();
       }
       if (e.target.className === 'delete-item') {
-        await removeItemFromCart(parseInt(prod.id));
+        const temp = await removeItemFromCart(parseInt(prod.id));
+        console.log(temp);
         prod.remove();
         return;
       }
+      await getCartItems(totalCalc);
     });
   });
 };
@@ -115,74 +120,79 @@ const loadShopppingCart = async () => {
 
 const updateCartItemList = async (prod) => {
   const $results = document.querySelector('.result');
-
+  let product;
   const result = await addItemToCart(prod);
   console.log(result);
   // 상품이 존재하는 체크 후 +1
   if (result?.check) {
-    const product = await getCartItemByKey(result.id);
+    product = await getCartItemByKey(result.id);
     const $result = document.getElementById(result.id);
+    console.log($result);
     const $quantity = $result.querySelector('.quantity');
     const $resultNumber = $result.querySelector('.result-number');
 
     $quantity.innerHTML = parseInt($quantity.innerHTML) + 1;
-    $resultNumber.innerHTML = (product.price * product.count).toLocaleString();
+    $resultNumber.innerHTML = (product.price * product.count).toLocaleString(); // 버그
     return;
   }
   // 상품이 없을 시에 추가
-  $results.innerHTML += `
-      <ul id="${prod.id}">
-        <li>
-            <div>
-                <p class="titleName">${prod.name}</p>
-                <span class="colorSize">- ${prod.color} / ${prod.size}</span>
-            </div>
-        </li>
-        <li>
-            <div class="result-wrap">
-                <p class="quantity">${prod.count}</p><a id="increase">+</a><a id="decrease">-</a>
-            </div>
-        </li>
-        <li>
-            <div class="result-number">${(parseInt(prod.price) * parseInt(prod.count)).toLocaleString()} ₩</div>
-        </li>
-        <li>
-            <div>
-                <a class="delete-item">X</a>
-            </div>
-        </li>
-    </ul>
-      `;
+
+  const prodId = document.createElement('ul');
+  prodId.id = 1;
+
+  prodId.innerHTML = `
+      <li>
+          <div>
+              <p class="titleName">${prod.name}</p>
+              <span class="colorSize">- ${prod.color} / ${prod.size}</span>
+          </div>
+      </li>
+      <li>
+          <div class="result-wrap">
+              <p class="quantity">${prod.count}</p><div id="increase" id="cursor">+</div><div id="decrease" id="cursor">-</div>
+          </div>
+      </li>
+      <li>
+          <div class="result-number">${(parseInt(prod.price) * parseInt(prod.count)).toLocaleString()}</div>
+      </li>
+      <li>
+          <div>
+              <div class="delete-item" id="cursor">X</div>
+          </div>
+      </li>
+  `;
+  $results.appendChild(prodId);
   return;
 };
 
 // page 로드 시 장바구니 제품 담기
 const loadCreateElement = (prod) => {
   const $result = document.querySelector('.result');
-
+  let $productUl;
   prod.map((product) => {
-    $result.innerHTML += `
-      <ul id="${product.id}">
-        <li>
-            <div>
-                <p class="titleName">${product.name}</p>
-                <span class="colorSize">- ${product.color} / ${product.size}</span>
-            </div>
-        </li>
-        <li>
-            <div class="result-wrap">
-                <p class="quantity">${product.count}</p><a id="increase">+</a><a id="decrease">-</a>
-            </div>
-        </li>
-        <li>
-            <div class="result-number">${(product.price * product.count).toLocaleString()} ₩</div>
-        </li>
-        <li>
-            <div>
-                <a class="delete-item">X</a>
-            </div>
-        </li>
-    </ul>
-      `;
+    let $productUl = document.createElement('ul');
+    $productUl.id = product.id;
+    $productUl.innerHTML += `
+      <li>
+          <div>
+              <p class="titleName">${product.name}</p>
+              <span class="colorSize">- ${product.color} / ${product.size}</span>
+          </div>
+      </li>
+      <li>
+          <div class="result-wrap">
+              <p class="quantity">${product.count}</p><div id="increase" class="cursor">+</div><div id="decrease" class="cursor">-</div>
+          </div>
+      </li>
+      <li>
+          <div class="result-number">${(product.price * product.count).toLocaleString()}</div>
+      </li>
+      <li>
+          <div>
+              <div class="delete-item" id="cursor">X</div>
+          </div>
+      </li>
+    `;
+    $result.appendChild($productUl);
   });
 };

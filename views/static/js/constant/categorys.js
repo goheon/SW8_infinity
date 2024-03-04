@@ -1,5 +1,5 @@
 export const categorysEnum = {
-  1: 'Outer',
+  1: 'Cap',
   2: 'Top',
   3: 'Bottoms',
   4: 'skirt',

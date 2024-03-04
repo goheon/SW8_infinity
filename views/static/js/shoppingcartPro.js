@@ -29,7 +29,7 @@ export const shoppingcartPro = async (type) => {
       if (event.target.className === 'minus') {
         if (parseInt($count.innerHTML) <= 0) {
           await removeItemFromCart(id);
-          tr2.remove();
+          event.target.remove();
           return;
         }
         await updateCart(id, parseInt($count.innerHTML) - 1);
@@ -39,7 +39,7 @@ export const shoppingcartPro = async (type) => {
 
       if (event.target.className === 'delete_product') {
         await removeItemFromCart(id);
-        tr2.remove();
+        event.target.remove();
         return;
       }
       await getCartItems(totalElement);
@@ -73,11 +73,10 @@ const removeCategory = () => {
     // 선택된 체크박스를 반복하여 처리
     checkboxes.forEach((checkbox) => {
       const greatGrandparentElement = checkbox.parentNode.parentNode.parentNode;
-      console.log(greatGrandparentElement);
-      console.log('dsadsds');
       // 체크된 체크박스인 경우
       if (checkbox.checked) {
         // 해당 항목 삭제
+        greatGrandparentElement.remove();
         console.log('삭제');
       }
     });
@@ -122,8 +121,8 @@ const createElement = (categoryProd) => {
         <td>무료</td>
         <td>
           <div class="order_delete">
-            <a href="/payment" class="select_order" data-link>주문하기</a>
-            <a href="#" class="delete_product" data-link>삭제하기</a>
+            <div href="/payment" class="select_order" data-link>주문하기</div>
+            <div class="delete_product" id="cursor" data-link>삭제하기</div>
           </div>
         </td>
       </tr>
@@ -150,9 +149,9 @@ const paymentPrice = (categoryProd) => {
   const $paymentPrice = document.querySelector('.paymentPrice');
   $paymentPrice.innerHTML = `
     <tr>
-      <td class="paymentPrice">${totalPrice.toLocaleString()}₩</td>
-      <td>+ ₩0</td>
-      <td class="paymentPrice">= ${totalPrice.toLocaleString()}₩</td>
+      <td class="paymentPrice">${totalPrice.toLocaleString()}</td>
+      <td>+ 0</td>
+      <td class="paymentPrice">= ${totalPrice.toLocaleString()}</td>
     </tr>
   `;
 };

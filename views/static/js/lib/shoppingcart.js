@@ -108,7 +108,7 @@ export const getCartItems = async (callback) => {
   let transaction = db.transaction(['cart'], 'readonly');
   let objectStore = transaction.objectStore('cart');
   let request = await objectStore.getAll();
-  await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     request.onsuccess = function (event) {
       callback(event.target.result);
       resolve(event.target.result);
@@ -123,7 +123,7 @@ export const getCartItems = async (callback) => {
 // 특정 key 값에 대한 항목 가져오기
 export const getCartItemByKey = async (key) => {
   await openDatabase(); // 데이터베이스 열기
-
+  console.log(key);
   return new Promise((resolve, reject) => {
     let transaction = db.transaction(['cart'], 'readonly');
     let objectStore = transaction.objectStore('cart');
@@ -131,8 +131,8 @@ export const getCartItemByKey = async (key) => {
     let request = objectStore.get(key);
 
     request.onsuccess = function (event) {
-      const cartItem = event.target.result;
-      resolve(cartItem);
+      console.log('Success item from the cart');
+      resolve(event.target.result);
     };
 
     request.onerror = function (event) {
@@ -148,7 +148,7 @@ export const removeItemFromCart = async (id) => {
   let transaction = db.transaction(['cart'], 'readwrite');
   let objectStore = transaction.objectStore('cart');
   let request = await objectStore.delete(id);
-  await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     request.onsuccess = function (event) {
       console.log('Item removed from the cart');
       resolve(event.target.result);
@@ -188,7 +188,7 @@ export const updateCart = async (id, count) => {
     count
   });
 
-  await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     updateRequest.onerror = function (event) {
       console.error('Error in updating product:', event.target.error);
       reject(event.target.error);

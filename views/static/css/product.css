@@ -179,3 +179,8 @@
 .no-cart {
   text-align: center;
 }
+
+.cursor,
+#cursor {
+  cursor: pointer;
+}

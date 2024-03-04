@@ -46,3 +46,17 @@
 .titleContainer {
   text-align: center;
 }
+
+.categorys {
+  color: darkblue;
+}
+
+.subCategory {
+  color: darkgreen;
+  margin: 0 1.5em 0;
+}
+
+.categoryTitle {
+  background-color: rgb(255, 202, 202);
+  color: black;
+}

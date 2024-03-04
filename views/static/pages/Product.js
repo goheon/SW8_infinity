@@ -56,7 +56,6 @@ export default class extends AbstractView {
         return `<img src="${imgSrc}">`;
       })
       .join('');
-    console.log(prodImage);
     return `
     <div class="detail-product">
         <div class="leftside-area">
@@ -148,13 +147,13 @@ export default class extends AbstractView {
                 <ul>
                     <li>
                         <div>
-                            <p><b>Total</b>(Qty) : <b id="total-price">0</b>₩ (<span id="quantity2">0</span>개)</p>
+                            <p><b>Total</b>(Qty) : <b id="total-price">0</b> ₩ (<span id="quantity2">0</span>개)</p>
                         </div>
                     </li>
                     <li>
                         <div>
                             <a href="/payment" class="get-product-btn" data-link>Buy Now</a>
-                            <a class="add-product-btn">Add to Cart</a>
+                            <button class="add-product-btn" class="cursor">Add to Cart</button>
                         </div>
                     </li>
                 </ul>
