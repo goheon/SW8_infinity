@@ -1,0 +1,177 @@
+.mypage-title {
+  text-align: left;
+  font-size: 40px;
+  font-weight: 700 bold;
+}
+
+.myInfo {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.infoBox {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px 10px;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
+}
+
+.infoBox img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-left: 10px;
+  margin-right: 20px;
+  height: 150px;
+  width: 150px;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px 0px;
+}
+
+.email {
+  font-size: 20px;
+  margin: 10px 0px;
+}
+
+.info_edit {
+  backdrop-filter: blur(10px);
+  font-size: 15px;
+  line-height: 1.5;
+  color: #656565;
+  text-decoration: underline;
+}
+
+.spantext {
+  margin-bottom: 20px;
+}
+
+.order_text {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.order_delivery_box {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  float: left;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.order_delivery_list {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px 10px;
+}
+
+.order_delivery_list li {
+  display: flex;
+  flex-direction: column;
+}
+
+.order_delivery_list li .fixpng {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.order_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.order_list_con {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.order_list_con li {
+  display: block;
+}
+
+.ol_list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.ol_list .center {
+  align-self: center;
+}
+
+.ol_list .img {
+  width: 60px;
+  height: 60px;
+}
+
+.icon-button {
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 100%;
+  width: 100px;
+}
+
+.deposit-btn {
+  background-image: url('/static/images/icon-moneybag.png');
+}
+
+.preparing-btn {
+  background-image: url('/static/images/icon-mallbag.png');
+}
+
+.delivery-btn {
+  background-image: url('/static/images/icon-delivery.png');
+}
+
+.complete-btn {
+  background-image: url('/static/images/icon-secure.png');
+}
+
+.refund-btn {
+  background-image: url('/static/images/icon-return.png');
+}
+
+.w-small.icon-button {
+  width: 50px;
+  height: 50px;
+}
+
+.my-order {
+  display: flex;
+  white-space: nowrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ol_list .mypage-order {
+  width: 100%;
+}
+
+.ol_list .mypage-order th,
+.ol_list .mypage-order td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  text-align: center;
+}

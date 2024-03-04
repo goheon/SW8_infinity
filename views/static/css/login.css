@@ -1,0 +1,94 @@
+/** login **/
+.titleArea {
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.titleArea h2 {
+  color: #000;
+  font-weight: normal;
+  font-size: 1.2em;
+}
+
+.login {
+  padding: 50px 10px;
+}
+
+.login fieldset {
+  position: relative;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.login fieldset .id,
+.login fieldset .password {
+  display: block;
+  width: 250px;
+  margin: 0 0 15px;
+  border-bottom: 1px solid;
+}
+
+.login fieldset input {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.login fieldset .btnLogin {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+}
+
+.login fieldset .btnLogin:hover {
+  background: none;
+  border: 1px solid #000;
+  color: #000;
+}
+
+legend {
+  position: absolute;
+  left: -9999px;
+  top: -99999px;
+  width: 0;
+  height: 0;
+  line-height: 0;
+}
+
+.login fieldset .forgot {
+  padding: 35px 0 10px;
+}
+
+.login fieldset .forgot li {
+  padding: 0 0 5px;
+}
+
+.login fieldset .btnJoin {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background: none;
+  border: 1px solid #999;
+  margin-top: 10px;
+}
+
+.login fieldset .btnJoin:hover {
+  border: 1px solid #000;
+  color: #000;
+  background: #ffffff;
+}

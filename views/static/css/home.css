@@ -1,0 +1,63 @@
+/** main **/
+.main-img {
+  margin: 0 auto 100px;
+}
+
+.title {
+  margin: 0 0 20px;
+}
+
+.main_line {
+  width: 50%;
+  height: 1px;
+  background: #999;
+  margin: 0 auto 60px;
+}
+
+.title > h2 {
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  margin: 0 0 60px;
+  letter-spacing: 0.05em;
+}
+
+.main.swiper {
+  width: 80%;
+  height: 100%;
+}
+
+.weekly-best .swiper-button-next:after,
+.weekly-best .swiper-button-prev:after {
+  display: none;
+}
+
+.weekly-best {
+  position: relative;
+  padding-bottom: 100px;
+}
+
+.New-arrival {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.New-arrival ul {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.New-arrival ul li {
+  width: 29.333%;
+  margin: 0 2% 80px;
+}
+
+.sale-before {
+  text-decoration: line-through;
+}
+
+.rotate {
+  transform: rotate(-180deg);
+}
