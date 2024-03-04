@@ -14,7 +14,7 @@ import {
 
 export const signup = () => {
   const cookie = getCookie('token');
-  if (cookie !== undefined) {
+  if (cookie) {
     navigateTo(BASE_URI);
   }
 
@@ -126,9 +126,8 @@ export const signup = () => {
     };
 
     const dataJson = JSON.stringify(postData);
-    const apiUrl = `http://localhost:3000/api/users`;
 
-    const res = await fetch(apiUrl, {
+    const res = await fetch(`${BASE_URI}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -137,7 +136,7 @@ export const signup = () => {
     });
 
     if (res.ok) {
-      navigateTo('http://localhost:3000/');
+      navigateTo(BASE_URI);
     } else {
       alert('회원가입에 실패하였습니다...');
     }

@@ -91,7 +91,6 @@
 
 .order_list {
   width: 100%;
-  height: 300px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -99,7 +98,6 @@
 
 .order_list_con {
   width: 100%;
-  height: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -112,8 +110,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin: 10px 0;
+}
+
+.ol_list .center {
+  align-self: center;
 }
 
 .ol_list .img {
@@ -149,4 +150,28 @@
 
 .refund-btn {
   background-image: url('/static/images/icon-return.png');
+}
+
+.w-small.icon-button {
+  width: 50px;
+  height: 50px;
+}
+
+.my-order {
+  display: flex;
+  white-space: nowrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ol_list .mypage-order {
+  width: 100%;
+}
+
+.ol_list .mypage-order th,
+.ol_list .mypage-order td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  text-align: center;
 }

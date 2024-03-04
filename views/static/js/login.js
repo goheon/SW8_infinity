@@ -6,7 +6,7 @@ import { emailValidation, passwordValidation } from './lib/validation.js';
 export const login = () => {
   // 리다이렉트를 login 을 화면에 뿌리고 나서 home 으로 이동하여서 좀 버벅임이 있다.
   const cookie = getCookie('token');
-  if (cookie !== undefined) {
+  if (cookie) {
     navigateTo(BASE_URI);
   }
   const $LoginBtn = document.querySelector('.btnLogin');
@@ -26,7 +26,7 @@ export const login = () => {
     }
 
     // 암호화를 하기 위해서는 secretKey가 필요한데 접근 불가
-    fetch('http://localhost:3000/api/auth', {
+    fetch(`${BASE_URI}/api/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -41,7 +41,12 @@ export const login = () => {
         throw new Error('네트워크 응답이 정상이 아닙니다.');
       }
       res.headers.get('Set-Cookie');
-      navigateTo(BASE_URI);
+      const roleId = getCookie('roleId');
+      if (roleId === 'admin') {
+        navigateTo(`${BASE_URI}/admin`);
+      } else {
+        navigateTo(BASE_URI);
+      }
       window.location.reload();
     });
   });

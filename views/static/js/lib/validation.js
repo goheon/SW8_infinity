@@ -19,7 +19,7 @@ const passwordValidation = (password, secondPassword) => {
   if (password !== secondPassword) {
     return 'no';
   }
-  if (password.length > 24 && !passwordRegex.test(password)) {
+  if (!passwordRegex.test(password)) {
     return 'less';
   }
   return 'ok';

@@ -37,12 +37,12 @@ export default class extends AbstractView {
         </div>-->
   
         <div class="sentence">
-          <label>아이디 *</label>
+          <label>이름 *</label>
           <div class="sentence_txt">
-            <span>(영어 소대문자/숫자, 4 - 16자)</span>
+            <span>이름</span>
           </div>
           <p class="control">
-            <input class="input idInput" type="text" placeholder="ID" />
+            <input class="input name" type="text" placeholder="이름 (3글자 이상)" />
           </p>
         </div>
   
@@ -73,19 +73,6 @@ export default class extends AbstractView {
             <br><br>
             <input type="text" id="sample4_roadAddress" class="input address" placeholder="도로명주소">
             <input type="text" id="sample4_detailAddress" class="input detailAddress" placeholder="상세주소">
-            <!-- <input
-              class="input address"
-              type="text"
-              placeholder="주소"
-              disabled
-            />
-            <button
-              type="button"
-              class="button is-light"
-              onclick="postalCode(this)"
-            >
-              우편번호
-            </button> -->
           </div>
         </div>
         <br />

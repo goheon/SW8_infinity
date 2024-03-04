@@ -6,10 +6,7 @@ const asyncHandler = require('../utils/async-handler');
 const cryptoJS = require('crypto-js');
 const getUserFromJwt = require('../middlewares/get-user-from-jwt');
 const orderProdsHandler = require('../utils/orderProds-handler');
-const {
-  NotFoundError,
-  AuthError
-} = require('../middlewares/error-handler');
+const { NotFoundError, AuthError } = require('../middlewares/error-handler');
 const ObjectId = require('mongodb').ObjectId;
 
 /**
@@ -23,7 +20,9 @@ router.get(
   getUserFromJwt,
   asyncHandler(async (req, res) => {
     const { userId } = req.query;
-    const orders = await Orders.find({"$and": [{orderId: userId }, {orderDeleteDate:{$exists: false}}]});
+    const orders = await Orders.find({
+      $and: [{ orderId: userId }, { orderDeleteDate: { $exists: false } }]
+    });
     //요청 유저와 정보 유저가 동일하지 않은 경우, 어드민 제외
     if (!req.user.roleId) {
       if (req.user.id !== userId) {
@@ -35,14 +34,6 @@ router.get(
       throw new NotFoundError('주문내역');
     }
 
-    for (order of orders) {
-      order.orderDetailAddress = cryptoJS.enc.Base64.parse(
-        order.orderDetailAddress
-      ).toString(cryptoJS.enc.Utf8);
-      order.orderPhoneNum = cryptoJS.enc.Base64.parse(
-        order.orderPhoneNum
-      ).toString(cryptoJS.enc.Utf8);
-    }
     res.json(orders);
   })
 );
@@ -81,7 +72,7 @@ router.post(
       });
     }
     await orderProdsHandler(newOrderProds);
-    
+
     try {
       await Orders.create({
         //요청된 토큰의 id로 주문 생성
@@ -210,7 +201,9 @@ router.get(
     const { orderProds } = req.query;
     const prodNums = orderProds.split(','); // 쉼표로 구분된 문자열을 배열로 분할하여 prodNums에 할당
 
-    const products = await Product.find({"$and": [{_id: { $in: prodNums } }, {prodUseYn:{$exists: false}}]});
+    const products = await Product.find({
+      $and: [{ _id: { $in: prodNums } }, { prodUseYn: { $exists: false } }]
+    });
 
     res.json(products);
   })

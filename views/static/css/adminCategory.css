@@ -1,0 +1,201 @@
+aside {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  background-color: #fff;
+}
+.aside {
+  display: block;
+  background-color: #f9f9f9;
+  border-right: 1px solid #dedede;
+}
+.aside .compose {
+  height: 95px;
+  margin: 0 -10px;
+  padding: 25px 30px;
+}
+.aside .compose .button {
+  color: #f6f7f7;
+}
+.aside .compose .button .compose {
+  font-size: 14px;
+  font-weight: 700;
+}
+.aside .main {
+  padding: 40px;
+  color: #6f7b7e;
+}
+.aside .title {
+  color: #6f7b7e;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.aside .main .item {
+  display: block;
+  padding: 10px 0;
+  color: #6f7b7e;
+}
+.aside .main .item.active {
+  background-color: #f1f1f1;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .item:active,
+.aside .main .item:hover {
+  background-color: #f2f2f2;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .icon {
+  font-size: 19px;
+  padding-right: 30px;
+  color: #a0a0a0;
+}
+.aside .main .name {
+  font-size: 15px;
+  color: #5d5d5d;
+  font-weight: 500;
+}
+
+.column.messages.hero.is-fullheight {
+  width: 80%;
+}
+
+.con-del {
+  margin: 15px 0px;
+  font-size: 12px;
+  width: 10%;
+}
+
+.con-add {
+  float: right;
+  margin: 15px;
+  margin-right: 50px;
+  font-size: 12px;
+  width: 10%;
+}
+
+.admin-ct-all {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 168, 168, 0.13);
+}
+
+.admin-ct-title {
+  font-size: 48px;
+}
+
+.ct-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  font-weight: bold;
+}
+
+#ct-checkbox {
+  display: flex;
+  margin-right: 20px;
+}
+
+.ct-box,
+.ac-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 630px;
+  height: 40px;
+  margin: 0px;
+  border-radius: 10px;
+  background-color: #ffb09e;
+  border: none;
+  position: relative;
+}
+
+.ct-box:hover .ct-button-box,
+.ac-box:hover .ac-button-box {
+  display: block;
+}
+
+.ct-button-box,
+.ac-button-box {
+  position: absolute;
+  right: 0;
+  display: none;
+  width: 25%;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.edit-product {
+  width: 45px;
+  height: 31px;
+}
+
+.form-box {
+  display: flex;
+  margin-top: 15px;
+}
+
+.admin-ct-applybtn {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 168, 168, 0.13);
+}
+
+.edit-apply {
+  margin: 10px;
+  font-size: 12px;
+}
+
+.cancle-apply {
+  margin: 10px;
+  font-size: 12px;
+}
+
+.ct-edit {
+  justify-content: normal;
+}
+
+.edit-product {
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.ac-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 630px;
+  height: 40px;
+  margin: 0px;
+  border-radius: 10px;
+  background-color: #ffe2dc;
+  border-bottom: 1px solid;
+}
+
+.ac-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+}
+
+.ac-button-box {
+  width: 25%;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.acform-box {
+  display: flex;
+  margin-left: 40px;
+}
+
+#ct-ac-checkbox {
+  margin-left: 30px;
+}

@@ -6,7 +6,7 @@ module.exports = async (orderProds) => {
   for (product of orderProds) {
     const target = await Product.findOne({ _id: product.prodNum });
     if (target.prodUseYn) {
-        throw new Error(`판매종료된 상품입니다.`)
+      throw new Error(`판매종료된 상품입니다.`);
     }
     if (target.prodRemains - product.orderProdCount < 0) {
       errorMessages += `${target.prodName} 상품의 재고 수량이 ${product.orderProdCount - target.prodRemains}개\n`;

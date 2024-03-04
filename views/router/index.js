@@ -24,8 +24,13 @@ const router = async () => {
   }
   const view = new match.route.View(getParams(match));
   // contents_main element 에 추가https://eslint.org/docs/latest/rules/new-cap
-  document.querySelector('#container>#contents_main').innerHTML =
-    await view.getHtml();
+  if (match.route.Path.includes('/admin')) {
+    document.body.innerHTML = await view.getHtml();
+  } else {
+    // 일반 페이지일 때는 contents_main element에 view의 HTML을 설정합니다.
+    document.querySelector('#container>#contents_main').innerHTML =
+      await view.getHtml();
+  }
   match.route.Script();
 
   await totalCountCalc();

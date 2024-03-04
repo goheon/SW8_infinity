@@ -24,6 +24,7 @@ export default class extends AbstractView {
       }
     );
     const prodData = await res.json();
+
     // 재고(prodRemains), 상품판매(prodCount)도 생각해야함
     const swiperImage = prodData.prodImgs
       .map((imgSrc) => {

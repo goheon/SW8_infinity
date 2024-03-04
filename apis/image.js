@@ -29,10 +29,11 @@ router.get('/upload', (req, res) => {
   );
 });
 
-router.post('/upload', upload.array('many'), (req, res) => {
-  console.log(req.files, req.body);
+// admin 미들웨어 추가
+router.post('/upload', upload.array('webImage'), (req, res, next) => {
   if (!req.files) {
-    return res.status(400).json({ message: '파일을 추가해주세요' });
+    const error = new Error('파일을 추가하세요');
+    return next(error);
   }
   const result = req.files.map((file) => {
     return {

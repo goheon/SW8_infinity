@@ -28,28 +28,37 @@ export function ExecDaumPostcode() {
       // 우편번호와 주소 정보를 해당 필드에 넣는다.
       document.getElementById('sample4_postcode').value = data.zonecode;
       document.getElementById('sample4_roadAddress').value = roadAddr;
-      document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
-      // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-      if (roadAddr !== '') {
-        document.getElementById('sample4_extraAddress').value = extraRoadAddr;
-      } else {
-        document.getElementById('sample4_extraAddress').value = '';
+      //지번주소 필드가 있을 경우에만 입력되게 설정
+      let jibun = document.getElementById('sample4_jibunAddress');
+      if(jibun) {
+        jibun.value = data.jibunAddress;
       }
-
+      // 기타 주소 필드가 있을 때만 입력되게 설정. 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+      let extraAddr = document.getElementById('sample4_extraAddress');
+      if(extraAddr) {
+        if (roadAddr !== '') {
+          document.getElementById('sample4_extraAddress').value = extraRoadAddr;
+        } else {
+          document.getElementById('sample4_extraAddress').value = '';
+        }
+      }
+      
       const guideTextBox = document.getElementById('guide');
-      // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-      if (data.autoRoadAddress) {
-        const expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-        guideTextBox.innerHTML = `(예상 도로명 주소 : ${expRoadAddr})`;
-        guideTextBox.style.display = 'block';
-      } else if (data.autoJibunAddress) {
-        const expJibunAddr = data.autoJibunAddress;
-        guideTextBox.innerHTML = `(예상 지번 주소 : ${expJibunAddr})`;
-        guideTextBox.style.display = 'block';
-      } else {
-        guideTextBox.innerHTML = '';
-        guideTextBox.style.display = 'none';
+      if(guideTextBox) {
+        // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+        if (data.autoRoadAddress) {
+          const expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+          guideTextBox.innerHTML = `(예상 도로명 주소 : ${expRoadAddr})`;
+          guideTextBox.style.display = 'block';
+        } else if (data.autoJibunAddress) {
+          const expJibunAddr = data.autoJibunAddress;
+          guideTextBox.innerHTML = `(예상 지번 주소 : ${expJibunAddr})`;
+          guideTextBox.style.display = 'block';
+        } else {
+          guideTextBox.innerHTML = '';
+          guideTextBox.style.display = 'none';
+        }
       }
     }
   }).open();

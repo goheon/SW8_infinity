@@ -8,6 +8,7 @@ router.post(
   passport.authenticate('local', { session: false }),
   (req, res, next) => {
     if (req.user) {
+
       setUserToken(res, req.user);
     }
     res.end();

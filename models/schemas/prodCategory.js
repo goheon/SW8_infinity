@@ -4,12 +4,12 @@ const prodSubSchema = require('./prodSubCategory');
 const prodCategorySchema = new Schema({
   prodMajorCategory: {
     type: Number,
-    required: true,
+    required: true
   },
   prodSubCategories: {
     type: [prodSubSchema],
-    required: true,
-  },
+    required: true
+  }
 });
 
 module.exports = prodCategorySchema;

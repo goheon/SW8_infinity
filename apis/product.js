@@ -6,11 +6,6 @@ const asyncHandler = require('../utils/async-handler');
 const { NotFoundError } = require('../middlewares/error-handler');
 
 const router = express.Router();
-// const pipeline = [ { '$match': { 'fullDocument.prodRemains': 0 } } ];
-// const changeStream = Product.watch(pipeline);
-// changeStream.on("change", (data)=> {
-//   console.log(data)
-// })
 
 // 상품 단일 조회 API
 router.get(
@@ -31,13 +26,15 @@ router.get(
   '/list',
   asyncHandler(async (req, res) => {
     const count = req.query.count || 1;
-    const product = await Product.find({}).sort({_id: -1}).skip(12*(count-1)).limit(12);
+    const product = await Product.find({})
+      .sort({ _id: -1 })
+      .skip(12 * (count - 1))
+      .limit(12);
     if (!product) {
       throw new NotFoundError('상품');
     }
     res.json(product);
   })
 );
-
 
 module.exports = router;

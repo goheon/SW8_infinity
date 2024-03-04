@@ -6,12 +6,15 @@ const { NotFoundError } = require('../middlewares/error-handler');
 
 const router = Router();
 
-router.get('/', asyncHandler(async (req, res) => {
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
     const categories = await ProdCategory.find({});
     if (!categories) {
-        throw new NotFoundError('카테고리');
+      throw new NotFoundError('카테고리');
     }
     res.json(categories);
-}));
+  })
+);
 
 module.exports = router;

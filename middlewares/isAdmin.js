@@ -1,4 +1,4 @@
-const { AuthError } = require('../middlewares/error-handler')
+const { AuthError } = require('../middlewares/error-handler');
 
 module.exports = (req, res, next) => {
   const user = req.user;

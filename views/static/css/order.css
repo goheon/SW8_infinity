@@ -27,12 +27,16 @@
   vertical-align: middle;
   padding: 10px;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-info {
   display: flex;
   align-items: center;
   text-align: left;
+  flex-direction: column;
 }
 
 .product-info img {
@@ -47,7 +51,8 @@
 }
 
 .product-txt {
-  padding-left: 20px;
+  width: 100%;
+  text-align: center;
 }
 
 .delivery-btn-status {
@@ -67,4 +72,11 @@
 
 .delivery-success {
   background: #5fda90;
+}
+
+.order-imgpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }

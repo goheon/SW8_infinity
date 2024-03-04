@@ -58,6 +58,8 @@ export default class extends AbstractView {
       <h2 style="font-size: 15px">
         선택상품을<a
           class="select_delete"
+          href="#"
+          class="delete2"
           style="margin: 0 0 5px 15px"
           >삭제하기</a
         >
@@ -75,8 +77,8 @@ export default class extends AbstractView {
       </table>
     </div>
     <div class="order">
-      <a href="#" class="all_product">전체상품주문</a>
-      <a href="#" class="select_product">선택상품주문</a>
+      <a href="#" class="all_product" data-link>전체상품주문</a>
+      <a href="#" class="select_product" data-link>선택상품주문</a>
     </div>
     <div class="product_all"></div>
         `;

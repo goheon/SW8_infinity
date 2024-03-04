@@ -1,4 +1,5 @@
 import AbstractView from './AbstractView.js';
+import { BASE_URI } from '../js/constant/url.js';
 
 export default class extends AbstractView {
   constructor(params) {
@@ -7,6 +8,79 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
+     //주문 정보 요청
+  const res = await fetch(`${BASE_URI}/api/payments?${this.params.orderNum}`, {
+    method: 'GET'
+  });
+  const targetOrder = await res.json();
+
+  //주문 내 상품 번호 문자열 생성
+  const prodNums = targetOrder.orderProds.map((prod) => prod.prodNum).join(',');
+
+  //상품 상세 정보 요청
+  const prodRes = await fetch(
+    `${BASE_URI}/api/orders/orderProds?orderProds=${prodNums}`,
+    {
+      method: 'GET'
+    }
+  );
+  const prods = await prodRes.json();
+
+  //핸드폰번호 포맷 설정
+  const first = targetOrder.orderPhoneNum.substring(0, 3);
+  const second = targetOrder.orderPhoneNum.substring(3, 7);
+  const third = targetOrder.orderPhoneNum.substring(7);
+  const formedOrderPhoneNum = `${first}-${second}-${third}`;
+  /**
+   * 주문 내 상품 처리
+   */
+
+  //상품 목록 행 생성
+  let productTableRows = ``;
+
+  //주문 상품 총액 초기화
+  let totalCost = 0;
+
+  for (let i = 0; i < prods.length; i++) {
+    const prod = prods[i];
+    const orderProdCount = targetOrder.orderProds[i].orderProdCount;
+    productTableRows += `
+      <tr>
+      <td class="td_product">
+          <div class="connect_img">
+              <a href="#" target="_blank">
+                  <img src="${prod.prodImgs[0]}" alt="">
+              </a>
+          </div>
+          <div class="article_info connect_info">
+              <div class="box_product">
+                  <strong>
+                      <span style="color:#09f;"></span>
+                      <span style="color:#f00;"></span>
+                      [자체 제작]
+                  </strong><br/>
+                  <span class="list_info">
+                      <a href="#" target="_blank">${prod.prodName}</a>
+                  </span>
+              </div>
+              <div class="order_option_box"><p>사이즈: ${prod.prodSize} <br>색상: ${prod.prodColor}</p></div>
+          </div>
+      </td>
+      <td><strong>${orderProdCount} 개</strong></td>
+      <td> 0 원</td>
+      <td rowspan="1">그룹1</td>
+      <td rowspan="1">
+          <span class="box_normal-dlv-amt">무료</span>
+      </td>
+      <td class="price">
+          <strong>${prod.prodCost * orderProdCount} 원</strong>
+      </td>
+  </tr>
+      `;
+    totalCost += prod.prodCost * orderProdCount;
+  }
+
+
     return `
     <div class="titleArea">
         <h2>Order / Payment</h2>
@@ -22,30 +96,28 @@ export default class extends AbstractView {
                     <div class="order__item__area">
                         <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
                             <li>
-                                <input type="radio" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="" checked="">
-                                <label for="delivery_choice_0">정영준님 배송지</label>
+                                <input type="radio" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="(${targetOrder.orderZipCode}) ${targetOrder.orderAddress} ${targetOrder.orderDetailAddress}" checked="">
+                                <label for="delivery_choice_0">주문정보 배송지</label>
                             </li>
                             <li>
-                                <input type="radio" class="n-radio" id="delivery_choice_1" name="delivery_choice" value="">
-                                <label for="delivery_choice_1">정영준님 배송지</label>
+                                <input type="radio" class="n-radio" id="delivery_choice_1" name="delivery_choice"  value="">
+                                <label for="delivery_choice_1" id="delivery-choice-1">회원님 배송지</label>
                             </li>
                         </ul>
-                        <button type="button" class="order__button">배송지 변경</button>
                     </div>
                 </li>
                 <li class="order__item delivery__item__info">
                     <span class="order__item__label">이름 / 연락처</span>
                     <div class="order__item__area">
                         <ul class="order__delivery__user">
-                            <li id="delivery-name">정영준</li>
-                            <li id="delivery-mobile">010-1234-1234</li>
-                            <li id="delivery-phone">010-1234-1234</li>
+                            <li id="delivery-name">${targetOrder.orderName}</li>
+                             <li id="delivery-mobile">${formedOrderPhoneNum}</li>
                         </ul>
                     </div>
                 </li>
                 <li class="order__item delivery__item__info">
                     <span class="order__item__label">주소</span>
-                    <div class="order__item__area" id="delivery-addr">(01234) 서울특별시 강남구 성수동 엘리스 1004호</div>
+                    <div class="order__item__area" id="delivery-addr">(${targetOrder.orderZipCode}) ${targetOrder.orderAddress} ${targetOrder.orderDetailAddress}</div>
                 </li> 
                 <li class="order__item order__item--overflow delivery__item__info">
                     <span class="order__item__label">배송 요청사항</span>
@@ -105,38 +177,7 @@ export default class extends AbstractView {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="td_product">
-                                <div class="connect_img">
-                                    <a href="#" target="_blank">
-                                        <img src="/static/images/product.png" alt="셔츠">
-                                    </a>
-                                </div>
-                                <div class="article_info connect_info">
-                                    <div class="box_product">
-                                        <strong>
-                                            <span style="color:#09f;"></span>
-                                            <span style="color:#f00;"></span>
-                                            [자체 제작]
-                                        </strong><br/>
-                                        <span class="list_info">
-                                            <a href="#" target="_blank">인피니티 플렌티 스웻 팬츠</a>
-                                        </span>
-                                    </div>
-                                    <div class="order_option_box"><p></p></div>
-                                </div>
-                            </td>
-                            <td><strong>1 개</strong></td>
-                            <td>- 55,500 원</td>
-                            <td rowspan="1">그룹1</td>
-                            <td rowspan="1">
-                                <span class="box_normal-dlv-amt">무료</span>
-                            </td>
-                            <td class="price">
-                                <del class="box_origin_price">92,500 원</del>
-                                <strong>37,000 원</strong>
-                            </td>
-                        </tr>
+                    ${productTableRows}
                     </tbody>
                 </table>
 
@@ -186,9 +227,9 @@ export default class extends AbstractView {
                         </li>
                         <li>
                             <div>
-                                <p>42,300원</p>
+                                <p class="total-cost">${totalCost} 원</p>
                                 <div class="add-all">
-                                    <p>42,300원</p>
+                                    <p class="total-cost">${totalCost} 원</p>
                                     <p>무료</p>
                                 </div>
                             </div>
@@ -197,7 +238,7 @@ export default class extends AbstractView {
                     <div>
                         <ul class="list">
                             <li>총 결제금액</li>
-                            <li class="last-amount"><b>42,300원</b></li>
+                            <li class="last-amount"><b class="total-cost">${totalCost} 원</b></li>
                         </ul>
                     </div>
                 </div>

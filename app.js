@@ -21,7 +21,6 @@ mongoose.connection.on('connected', () => {
 
 var app = express();
 
-
 app.use(passport.initialize());
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,7 +29,6 @@ app.use('/api', apiRouter);
 app.use('/static', express.static(path.resolve(__dirname, 'views', 'static')));
 app.use(express.static('views'));
 app.use(express.urlencoded({ extended: false }));
-
 
 app.use(errorHandler);
 

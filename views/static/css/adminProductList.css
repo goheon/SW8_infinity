@@ -1,0 +1,177 @@
+aside {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  background-color: #fff;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+.aside {
+  display: block;
+  background-color: #f9f9f9;
+  border-right: 1px solid #dedede;
+}
+.aside .compose {
+  height: 95px;
+  margin: 0 -10px;
+  padding: 25px 30px;
+}
+.aside .compose .button {
+  color: #f6f7f7;
+}
+.aside .compose .button .compose {
+  font-size: 14px;
+  font-weight: 700;
+}
+.aside .main {
+  padding: 40px;
+  color: #6f7b7e;
+}
+.aside .title {
+  color: #6f7b7e;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.aside .main .item {
+  display: block;
+  padding: 10px 0;
+  color: #6f7b7e;
+}
+.aside .main .item.active {
+  background-color: #f1f1f1;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .item:active,
+.aside .main .item:hover {
+  background-color: #f2f2f2;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .icon {
+  font-size: 19px;
+  padding-right: 30px;
+  color: #a0a0a0;
+}
+.aside .main .name {
+  font-size: 15px;
+  color: #5d5d5d;
+  font-weight: 500;
+}
+
+.column.messages.hero.is-fullheight {
+  width: 80%;
+}
+
+/* 여기부터 작성 */
+
+.flexbox-Container {
+  display: flex;
+  float: left;
+  flex-wrap: wrap;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+}
+
+.product-item {
+  padding: 1rem;
+  background-color: #fafafa;
+  border: 1px solid;
+  border-radius: 16px;
+  width: 420px;
+  height: 35%;
+  margin: 15px;
+}
+
+.product-item img {
+  margin: 0;
+  height: 120px;
+  width: 120px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.product-Description {
+  width: 100%;
+  display: flex;
+}
+
+.des-form {
+  margin-left: 25px;
+}
+
+.des-btn {
+  font-size: 20px;
+  text-align: center;
+  border: none;
+}
+
+.des-Text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.explain-item-main {
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.explain-item-sub {
+  font-size: 14px;
+}
+
+.product-status {
+  margin: 20px 0px;
+  border: 1px solid;
+  border-radius: 8px;
+  text-align: justify;
+}
+
+.ps-text {
+  padding: 5px;
+  text-align: justify;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.ps-text2 {
+  justify-content: space-between;
+  padding: 5px;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.update-href {
+  font-size: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.des-more-content {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.des-more-content:hover {
+  background: #fff;
+}
+
+.des-more-content:hover .update-href {
+  color: #000;
+}

@@ -49,7 +49,7 @@ _2023.02.19 ~ 2023.03.01_
 
 ### 백엔드
 
-`Express` 서버를 이용하여 `REST API`를 구축하여 독립적인 서버를 만들었습니다.
+`Express` 서버를 이용하여 `RESTful API`를 구축하여 독립적인 서버를 만들었습니다.
 
 DB 명세서를 작성하여 데이터 구조를 계획하고 정의하였습니다.
 
@@ -88,6 +88,8 @@ DB 명세서를 작성하여 데이터 구조를 계획하고 정의하였습니
 - Express
 - Mongoose (ODM)
 - MongoDB (DB)
+- passport
+- jwt
 
 ---
 
@@ -103,5 +105,6 @@ pm2 로 서버 시작할 경우
 
 ```shell
 npm install -g pm2
+
 npm run deploy
 ```
