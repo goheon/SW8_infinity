@@ -1,0 +1,155 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+aside {
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  background-color: #fff;
+}
+.aside {
+  display: block;
+  background-color: #f9f9f9;
+  border-right: 1px solid #dedede;
+}
+.aside .compose {
+  height: 95px;
+  margin: 0 -10px;
+  padding: 25px 30px;
+}
+.aside .compose .button {
+  color: #f6f7f7;
+}
+.aside .compose .button .compose {
+  font-size: 14px;
+  font-weight: 700;
+}
+.aside .main {
+  padding: 40px;
+  color: #6f7b7e;
+}
+.aside .title {
+  color: #6f7b7e;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.aside .main .item {
+  display: block;
+  padding: 10px 0;
+  color: #6f7b7e;
+}
+.aside .main .item.active {
+  background-color: #f1f1f1;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .item:active,
+.aside .main .item:hover {
+  background-color: #f2f2f2;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .icon {
+  font-size: 19px;
+  padding-right: 30px;
+  color: #a0a0a0;
+}
+.aside .main .name {
+  font-size: 15px;
+  color: #5d5d5d;
+  font-weight: 500;
+}
+.productSetting {
+  text-align: center;
+  width: 100%;
+  display: flex;
+}
+.addImage {
+  width: 50%;
+  height: 800px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 100px;
+}
+.addImage img {
+  margin-bottom: 30px;
+}
+.productButton {
+  background-color: #5a5a5a;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 14px;
+}
+
+#previewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.prodImgs {
+  width: 300px;
+  margin-left: 3rem;
+}
+
+#product {
+  display: none;
+}
+
+.submit {
+  background-color: #0078ff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: #fff;
+}
+.productInformation {
+  height: 800px;
+  text-align: left;
+  vertical-align: middle;
+  margin-top: 100px;
+}
+.productInformation input {
+  margin: 5px 0 30px 0;
+  border-radius: 8px;
+  border: 1px solid #5a5a5a;
+  height: 35px;
+  background-color: #e9e9e9;
+}
+.productInforButton {
+  text-align: center;
+}
+.productInformation button {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #fff;
+  background-color: #5a5a5a;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  margin: 15px 10px 0px 10px;
+}
+
+.imageForm__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100px;
+}
+
+.imageForm__inner--btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

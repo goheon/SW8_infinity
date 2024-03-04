@@ -141,10 +141,4 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-# .DS_store
-.DSStore
-..DSStore
-/.DS_Store
-/..DS_Store
-
 # End of https://www.toptal.com/developers/gitignore/api/node

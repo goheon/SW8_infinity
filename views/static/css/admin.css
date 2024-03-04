@@ -1,0 +1,148 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+aside {
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  background-color: #fff;
+}
+.aside {
+  display: block;
+  background-color: #f9f9f9;
+  border-right: 1px solid #dedede;
+}
+.aside .compose {
+  height: 95px;
+  margin: 0 -10px;
+  padding: 25px 30px;
+}
+.aside .compose .button {
+  color: #f6f7f7;
+}
+.aside .compose .button .compose {
+  font-size: 14px;
+  font-weight: 700;
+}
+.aside .main {
+  padding: 40px;
+  color: #6f7b7e;
+}
+.aside .title {
+  color: #6f7b7e;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.aside .main .item {
+  display: block;
+  padding: 10px 0;
+  color: #6f7b7e;
+}
+.aside .main .item.active {
+  background-color: #f1f1f1;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .item:active,
+.aside .main .item:hover {
+  background-color: #f2f2f2;
+  margin: 0 -50px;
+  padding-left: 50px;
+}
+.aside .main .icon {
+  font-size: 19px;
+  padding-right: 30px;
+  color: #a0a0a0;
+}
+.aside .main .name {
+  font-size: 15px;
+  color: #5d5d5d;
+  font-weight: 500;
+}
+.column {
+  width: 100%;
+}
+.column messages hero is-fullheight {
+  width: 100%;
+}
+.adminTable {
+  width: 80%;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 14px;
+}
+.adminTable tr {
+  border-bottom: 1px solid #464646;
+}
+.adminTable tr td {
+  vertical-align: middle;
+}
+.adminThead {
+  height: 70px;
+}
+.adminTbodyTr {
+  height: 60px;
+}
+.change {
+  width: 80%;
+  text-align: right;
+  margin-bottom: 30px;
+}
+.applyChange {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 140px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #fff;
+  background-color: #0a82ff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.cancel {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 80px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #fff;
+  background-color: #969696;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+.applyChange:hover {
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
+  color: #fff;
+}
+.cancel:hover {
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
+  color: #fff;
+}
+.paging {
+  width: 80%;
+  text-align: center;
+}
+.paging a {
+  margin: 7px;
+  color: #787878;
+  padding: 5px;
+}
+.paging a:hover {
+  background-color: #d2d2d2;
+}
+.paging .currentPage {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #3c3c3c;
+}
