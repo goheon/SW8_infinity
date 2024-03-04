@@ -1,7 +1,10 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const path = require('path');
+const mongoose = require('mongoose');
+const passport = require('passport');
+var path = require('path');
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
