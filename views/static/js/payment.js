@@ -29,12 +29,13 @@ export const payment = async () => {
   const userInfo = await findUserRes.json();
   document.querySelector('#delivery-choice-1').innerHTML =
     `${userInfo.name}님 배송지`;
-    document.getElementById("delivery_choice_1").value = `(${userInfo.zipCode}) ${userInfo.address} ${userInfo.detailAddress}`
+  document.getElementById('delivery_choice_1').value =
+    `(${userInfo.zipCode}) ${userInfo.address} ${userInfo.detailAddress}`;
 
-    //배송지 radio button value 변경
-    document.querySelectorAll('.n-radio').forEach(function(radio) {
-        radio.addEventListener('change', function() {
-            let adrr = this.value;
-            document.getElementById('delivery-addr').innerHTML = this.value;
-        });
-    })};
+  //배송지 radio button value 변경
+  document.querySelectorAll('.n-radio').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      document.getElementById('delivery-addr').innerHTML = this.value;
+    });
+  });
+};

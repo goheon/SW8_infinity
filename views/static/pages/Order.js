@@ -33,7 +33,7 @@ export default class extends AbstractView {
         (accumulator, currentValue) => accumulator + currentValue,
         0
       );
-      console.log(orderSum); // 결과: 3
+
       const prodRes = await fetch(
         `${BASE_URI}/api/orders/orderProds?orderProds=${prodNums}`,
         {

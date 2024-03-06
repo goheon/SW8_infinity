@@ -79,7 +79,7 @@ export const rightbar = async () => {
         <a href="/shoppingCart" data-link class="totalCartCount">Cart ― 0</a>
       </div>
       <div class="right-element">
-        <a href="/order" data-link>Order</a>
+        <a href="/order-list" data-link>Order</a>
         <a href="/mypage" data-link>My Page</a>
         <button id="logout">Log out</button>
       </div>

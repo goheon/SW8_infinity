@@ -26,7 +26,7 @@ router.get(
   '/list',
   asyncHandler(async (req, res) => {
     const count = req.query.count || 1;
-    const product = await Product.find({})
+    const product = await Product.find({ prodUseYn: { $exists: false } })
       .sort({ _id: -1 })
       .skip(12 * (count - 1))
       .limit(12);

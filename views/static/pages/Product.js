@@ -4,7 +4,6 @@ import AbstractView from './AbstractView.js';
 export default class extends AbstractView {
   constructor(params) {
     super(params);
-    console.log(this.params);
     this.setTitle('Product');
   }
 
@@ -74,6 +73,7 @@ export default class extends AbstractView {
         <div class="rightside-area">
             <div class="title-product">
                 <h4><b id="titleName">${prodData.prodName}</b></h4>
+                <p>상품번호: <span id="prodNum">${prodData._id}</span></p>
             </div>
             <div class="detail-txt">
                 <ul>
@@ -153,7 +153,7 @@ export default class extends AbstractView {
                     </li>
                     <li>
                         <div>
-                            <a href="/payment" class="get-product-btn" data-link>Buy Now</a>
+                            <a href="/order/create?prodNums=${prodData._id}" class="get-product-btn" data-link>Buy Now</a>
                             <a class="add-product-btn">Add to Cart</a>
                         </div>
                     </li>

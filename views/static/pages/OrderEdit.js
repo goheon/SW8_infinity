@@ -8,7 +8,7 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
-    const res = await fetch(`${BASE_URI}/api/payments?${this.params.orderNum}`, {
+    const res = await fetch(`${BASE_URI}/api/payments?orderNum=${this.params.orderNum}`, {
         method: 'GET'
       });
       const targetOrder = await res.json();
