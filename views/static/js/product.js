@@ -27,6 +27,7 @@ export const product = async () => {
   await loadShopppingCart();
 
   // 장바구니 추가
+  const prodNum = document.querySelector('#prodNum');
   const $ulElements = document.querySelectorAll('.result>ul');
   const $color = document.getElementById('clothColor');
   const $price = document.querySelector('.price');
@@ -60,6 +61,7 @@ export const product = async () => {
         name: $titleName.innerHTML,
         price: parseInt($price.innerHTML),
         id: nextKey,
+        prodNum: prodNum.innerHTML,
         count: 1
       });
       return;

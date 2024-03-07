@@ -24,7 +24,7 @@ export default class extends AbstractView {
         <div class="infoBox_script">
           <span class="name"></span><br>
           <span class="email"></span><br>
-          <a href="/mypageEdit" class="info_edit" data-link>정보수정</a>
+          <a href="/mypage/edit" class="info_edit" data-link>정보수정</a>
         </div>
     </div>
 

@@ -199,8 +199,8 @@ router.get(
   '/orderProds',
   asyncHandler(async (req, res) => {
     const { orderProds } = req.query;
-    const prodNums = orderProds.split(','); // 쉼표로 구분된 문자열을 배열로 분할하여 prodNums에 할당
-
+    const prodNums = orderProds.split(',');
+    console.log(prodNums) // 쉼표로 구분된 문자열을 배열로 분할하여 prodNums에 할당
     const products = await Product.find({
       $and: [{ _id: { $in: prodNums } }, { prodUseYn: { $exists: false } }]
     });

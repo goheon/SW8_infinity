@@ -117,7 +117,7 @@ const createElement = (categoryProd) => {
           />
           <div id="result">${product.count}</div>
         </td>
-        <td class="prodPrice">${product.price * product.count}</td>
+        <td class="prodPrice">${(product.price * product.count).toLocaleString()}</td>
         <td>기본배송</td>
         <td>무료</td>
         <td>
