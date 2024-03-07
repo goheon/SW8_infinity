@@ -2,6 +2,7 @@ import { BASE_URI } from './constant/url.js';
 import { navigateTo } from '../../router/index.js';
 import { getCookie } from './lib/getCookie.js';
 import { ExecDaumPostcode } from './lib/daumPostCode.js';
+import { clearCart } from './lib/shoppingcart.js';
 
 export const orderCreate = async () => {
   const cookie = getCookie('token');
@@ -177,8 +178,10 @@ export const orderCreate = async () => {
         alert('주문정보 추가에 실패했습니다.');
         throw new Error('주문정보 추가에 실패했습니다.');
       } else {
+        //주문 완료 후 장바구니 초기화
+        clearCart();
         response.json();
-        alert('주문정보 추가에 성공하였습니다.');
+        alert('주문이 완료되었습니다.');
         navigateTo(BASE_URI);
       }
     });
@@ -277,7 +280,7 @@ export const orderCreate = async () => {
         throw new Error('주문정보 추가에 실패했습니다.');
       } else {
         response.json();
-        alert('주문정보 추가에 성공하였습니다.');
+        alert('주문이 완료되었습니다.');
         navigateTo(BASE_URI);
       }
     });

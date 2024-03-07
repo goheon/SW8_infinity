@@ -19,7 +19,6 @@ export default class extends AbstractView {
       method: 'GET'
     });
     const orderData = await res.json();
-    console.log(orderData);
 
     let orderRows = ''; // 주문 행을 저장할 변수 선언
 

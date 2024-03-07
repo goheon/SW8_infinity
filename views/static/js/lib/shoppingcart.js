@@ -274,3 +274,33 @@ export const totalCountCalc = async () => {
   const totalCartCount = await getProductKeys();
   $totalCartCount.innerHTML = `Cart - ${totalCartCount.result}`;
 };
+
+
+export const clearCart = () => {
+  return new Promise((resolve, reject) => {
+      let request = indexedDB.open('cartDB', 1);
+
+      request.onsuccess = function (event) {
+          const db = event.target.result;
+
+          // 트랜잭션 시작
+          let transaction = db.transaction(['cart'], 'readwrite');
+          let objectStore = transaction.objectStore('cart');
+
+          // 모든 데이터 삭제
+          let clearRequest = objectStore.clear();
+
+          clearRequest.onsuccess = function (event) {
+              resolve('IndexedDB data cleared successfully.');
+          };
+
+          clearRequest.onerror = function (error) {
+              reject(error.target.error);
+          };
+      };
+
+      request.onerror = function (error) {
+          reject(error.target.error);
+      };
+  });
+}

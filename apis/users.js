@@ -38,8 +38,6 @@ router.get(
         throw new AuthError('권한이 없습니다.');
       }
     }
-    user.detailAddress = CryptoJS.enc.Base64.parse(user.detailAddress).toString(CryptoJS.enc.Utf8);
-    user.phoneNum = CryptoJS.enc.Base64.parse(user.phoneNum).toString(CryptoJS.enc.Utf8);
 
     res.json(user);
   })
@@ -128,8 +126,6 @@ router.put(
     );
     const user = await User.findOne({ id });
     
-    user.detailAddress = CryptoJS.enc.Base64.parse(user.detailAddress).toString(CryptoJS.enc.Utf8);
-    user.phoneNum = CryptoJS.enc.Base64.parse(user.phoneNum).toString(CryptoJS.enc.Utf8);
     res.json(user);
   })
 );
