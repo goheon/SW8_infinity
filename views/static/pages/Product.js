@@ -73,7 +73,7 @@ export default class extends AbstractView {
         <div class="rightside-area">
             <div class="title-product">
                 <h4><b id="titleName">${prodData.prodName}</b></h4>
-                <p>상품번호: <span id="prodNum">${prodData._id}</span></p>
+                <p style="display:none">상품번호: <span id="prodNum">${prodData._id}</span></p>
             </div>
             <div class="detail-txt">
                 <ul>

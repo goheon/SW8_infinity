@@ -2,25 +2,24 @@ import AbstractView from './AbstractView.js';
 import { BASE_URI } from '../js/constant/url.js';
 
 function fetchDataFromIndexedDB() {
-    return new Promise((resolve, reject) => {
-        let request = indexedDB.open('cartDB', 1);
-        request.onsuccess = async function (e) {
-            const db = e.target.result;
-            const transaction = db.transaction(['cart'], 'readonly');
-            const objectStore = transaction.objectStore('cart');
-            const request = await objectStore.getAll();
-            request.onsuccess = function (e) {
-                const data = e.target.result;
-                console.log(data)
-                let prodNums = data.map((prod) => prod.prodNum
-                ).join(',');
-                resolve(prodNums); // 데이터를 성공적으로 가져온 후에 resolve 호출
-            };
-        };
-        request.onerror = function (e) {
-            reject(e.target.error);
-        };
-    });
+  return new Promise((resolve, reject) => {
+    let request = indexedDB.open('cartDB', 1);
+    request.onsuccess = async function (e) {
+      const db = e.target.result;
+      const transaction = db.transaction(['cart'], 'readonly');
+      const objectStore = transaction.objectStore('cart');
+      const request = await objectStore.getAll();
+      request.onsuccess = function (e) {
+        const data = e.target.result;
+        let prodNums = data.map((prod) => prod.prodNum).join(',');
+        let prodCounts = data.map((prod) => prod.count).join(',');
+        resolve({ prodNums, prodCounts }); // 데이터를 성공적으로 가져온 후에 resolve 호출
+      };
+    };
+    request.onerror = function (e) {
+      reject(e.target.error);
+    };
+  });
 }
 
 export default class extends AbstractView {
@@ -29,9 +28,10 @@ export default class extends AbstractView {
     this.setTitle('주문하기');
   }
   async getHtml() {
+    let prodCounts1;
     let prods;
+    let checker;
     //즉시 주문시에만
-    console.log(this.params.prodNums)
     const urlParams = new URLSearchParams(window.location.search);
     const prodNums = urlParams.get('prodNums');
     if (prodNums) {
@@ -44,34 +44,34 @@ export default class extends AbstractView {
       );
       prods = await prodRes.json();
     } else {
-        try {
-            const prodNums = await fetchDataFromIndexedDB();
-            const prodRes = await fetch(
-                `${BASE_URI}/api/orders/orderProds?orderProds=${prodNums}`,
-                {
-                    method: 'GET'
-                }
-            );
-            prods = await prodRes.json();
-        } catch (error) {
-            console.error('Error fetching data from IndexedDB:', error);
-        }
+      try {
+        let { prodNums, prodCounts } = await fetchDataFromIndexedDB();
+        prodCounts1 = prodCounts;
+        const prodRes = await fetch(
+          `${BASE_URI}/api/orders/orderProds?orderProds=${prodNums}`,
+          {
+            method: 'GET'
+          }
+        );
+        prods = await prodRes.json();
+        checker = 1;
+      } catch (error) {
+        console.error('Error fetching data from IndexedDB:', error);
+      }
     }
     /**
      * 주문 내 상품 처리
      */
     //상품 목록 행 생성
     let productTableRows = ``;
-
-    //주문 상품 총액 초기화
-    let totalCost = 0;
-    let Cart;
-
+    if (checker === 1) {
+      prodCounts1 = prodCounts1.split(',');
+    }
     for (let i = 0; i < prods.length; i++) {
       const prod = prods[i];
       let orderProdCount = 1;
-      if (Cart) {
-        orderProdCount = targetOrder.orderProds[i].orderProdCount;
+      if (checker === 1) {
+        orderProdCount = prodCounts1[i];
       }
       productTableRows += `
       <tr>
@@ -89,13 +89,17 @@ export default class extends AbstractView {
                       [자체 제작]
                   </strong><br/>
                   <span class="list_info">
-                      <a href="#" target="_blank">${prod.prodName}</a>
+                      <a href="/product/${prod._id}" target="_blank">${prod.prodName}</a>
                   </span>
+                  <br>
+                  <span class="list_info" style="display:none">
+                  상품번호: <span class="prod_num">${prod._id}</span>
+              </span>
               </div>
               <div class="order_option_box"><p>사이즈: ${prod.prodSize} <br>색상: ${prod.prodColor}</p></div>
           </div>
       </td>
-      <td><strong>${orderProdCount} 개</strong></td>
+      <td><strong><span class="prod_count">${orderProdCount}</span> 개</strong></td>
       <td> 0 원</td>
       <td rowspan="1">그룹1</td>
       <td rowspan="1">
@@ -106,7 +110,6 @@ export default class extends AbstractView {
       </td>
   </tr>
       `;
-      totalCost += prod.prodCost * orderProdCount;
     }
 
     return `
@@ -124,7 +127,7 @@ export default class extends AbstractView {
             <div class="order__item__area">
                 <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
                     <li>
-                        <input type="radio" class="n-radio" id="delivery_choice_0" name="delivery_choice" value checked="">
+                        <input type="radio" class="n-radio" id="delivery_choice_0" name="delivery_choice" value>
                         <label for="delivery_choice_0">주문정보 배송지</label>
                     </li>
                     <li>
@@ -171,7 +174,7 @@ export default class extends AbstractView {
         <span class="order__item__label"></span>
         <input width = "200px" readonly id="sample4_roadAddress">
         <span class="dash"></span>
-        <input type="text" class="order__item__area" />
+        <input type="text" class="order__item__area" placeholder="상세주소"/>
       </li>
       <li class="order__item order__item--overflow delivery__item__info">
           <span class="order__item__label">배송 요청사항</span>
@@ -238,7 +241,7 @@ export default class extends AbstractView {
             </div>
             
             <div class="center-orderedit">
-                <button type="submit" id="orderEditLink">주문하기</a>
+                <button type="submit" id="createOrder">주문하기</a>
             </div>
         </div>
     </div>

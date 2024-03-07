@@ -1,4 +1,5 @@
 import { BASE_URI } from './constant/url.js';
+import { navigateTo } from '../../router/index.js';
 import { getCookie } from './lib/getCookie.js';
 import { ExecDaumPostcode } from './lib/daumPostCode.js';
 
@@ -36,7 +37,9 @@ export const orderCreate = async () => {
   const first = userInfo.phoneNum.substring(0, 3);
   const second = userInfo.phoneNum.substring(3, 7);
   const third = userInfo.phoneNum.substring(7);
-  const formedOrderPhoneNum = `${first}-${second}-${third}`;
+  const formedUserPhoneNum = `${first}-${second}-${third}`;
+
+  const orderCreateBtn = document.querySelector('#createOrder');
 
   //배송지 radio button 처리
   const $userRadio = document.querySelector('#delivery_choice_1');
@@ -81,7 +84,7 @@ export const orderCreate = async () => {
         <span class="order__item__label"></span>
         <input width = "200px" readonly id="sample4_roadAddress">
         <span class="dash"></span>
-        <input type="text" class="order__item__area" />
+        <input type="text" class="order__item__area" id="sample4_detailAddress" placeholder="상세주소"/>
       </li>
       <li class="order__item order__item--overflow delivery__item__info">
           <span class="order__item__label">배송 요청사항</span>
@@ -121,6 +124,64 @@ export const orderCreate = async () => {
 
     const $findAddress = document.querySelector('#find-address');
     $findAddress.addEventListener('click', ExecDaumPostcode);
+
+    orderCreateBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const $orderName = document.querySelector('#delivery-name');
+      const $orderPhone1 = document.querySelector('.phone1');
+      const $orderPhone2 = document.querySelector('.phone2');
+      const $orderPhone3 = document.querySelector('.phone3');
+      const $orderZipCode = document.querySelector('#sample4_postcode');
+      const $orderAddress = document.querySelector('#sample4_roadAddress');
+      const $orderDetailAddress = document.querySelector(
+        '#sample4_detailAddress'
+      );
+      const $orderReq = document.querySelector('#dlv_selectbox');
+
+      const phoneNumber =
+        $orderPhone1.value + $orderPhone2.value + $orderPhone3.value;
+      const base64phoneNum = CryptoJS.enc.Base64.stringify(
+        CryptoJS.enc.Utf8.parse(phoneNumber)
+      );
+      const base64detailAddress = CryptoJS.enc.Base64.stringify(
+        CryptoJS.enc.Utf8.parse($orderDetailAddress.value)
+      );
+
+      //주문상품목록담기
+      const $prod_count = document.querySelectorAll('.prod_count');
+      const $prod_num = document.querySelectorAll('.prod_num');
+      let orderProds = [];
+      for (let i = 0; i < $prod_count.length; i++) {
+        orderProds.push({
+          prodNum: $prod_num[i].innerHTML,
+          orderProdCount: $prod_count[i].innerHTML
+        });
+      }
+      const response = await fetch(`${BASE_URI}/api/orders`, {
+        method: 'POST',
+        body: JSON.stringify({
+          orderProds,
+          orderName: $orderName.value,
+          orderZipCode: $orderZipCode.value,
+          orderAddress: $orderAddress.value,
+          orderDetailAddress: base64detailAddress,
+          orderPhoneNum: base64phoneNum,
+          orderReq: $orderReq.value
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        alert('주문정보 추가에 실패했습니다.');
+        throw new Error('주문정보 추가에 실패했습니다.');
+      } else {
+        response.json();
+        alert('주문정보 추가에 성공하였습니다.');
+        navigateTo(BASE_URI);
+      }
+    });
   });
 
   //회원 배송지 선택시 html
@@ -131,7 +192,7 @@ export const orderCreate = async () => {
           <div class="order__item__area">
               <ul class="order__delivery__user">
                   <li id="delivery-name">${userInfo.name}</li>
-                   <li id="delivery-mobile">${formedOrderPhoneNum}</li>
+                   <li id="delivery-mobile">${formedUserPhoneNum}</li>
               </ul>
           </div>
       </li>
@@ -173,5 +234,52 @@ export const orderCreate = async () => {
               <textarea class="order__textarea" name="etc_textarea" id="etc_textarea" style="display:none" maxlength="50" onkeyup="return textarea_maxlength(this)" placeholder="최대 50자까지 입력 가능합니다."></textarea>
           </div>
       </li>`;
+
+    const $orderReq = document.querySelector('#dlv_selectbox');
+
+    orderCreateBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      //주문상품목록담기
+      const $prod_count = document.querySelectorAll('.prod_count');
+      const $prod_num = document.querySelectorAll('.prod_num');
+      let orderProds = [];
+      for (let i = 0; i < $prod_count.length; i++) {
+        orderProds.push({
+          prodNum: $prod_num[i].innerHTML,
+          orderProdCount: $prod_count[i].innerHTML
+        });
+      }
+
+      const base64phoneNum = CryptoJS.enc.Base64.stringify(
+        CryptoJS.enc.Utf8.parse(formedUserPhoneNum)
+      );
+      const base64detailAddress = CryptoJS.enc.Base64.stringify(
+        CryptoJS.enc.Utf8.parse(userInfo.detailAddress)
+      );
+
+      const response = await fetch(`${BASE_URI}/api/orders`, {
+        method: 'POST',
+        body: JSON.stringify({
+          orderProds,
+          orderName: userInfo.name,
+          orderZipCode: userInfo.zipCode,
+          orderAddress: userInfo.address,
+          orderDetailAddress: base64detailAddress,
+          orderPhoneNum: base64phoneNum,
+          orderReq: $orderReq.value
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        alert('주문정보 추가에 실패했습니다.');
+        throw new Error('주문정보 추가에 실패했습니다.');
+      } else {
+        response.json();
+        alert('주문정보 추가에 성공하였습니다.');
+        navigateTo(BASE_URI);
+      }
+    });
   });
 };
