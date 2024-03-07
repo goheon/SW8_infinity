@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const cryptoJS = require('crypto-js');
+const CryptoJS = require('crypto-js');
 
 const { User } = require('../models');
 const {
@@ -125,6 +125,7 @@ router.put(
       { pwd, name, email, zipCode, address, detailAddress, phoneNum }
     );
     const user = await User.findOne({ id });
+    
     res.json(user);
   })
 );

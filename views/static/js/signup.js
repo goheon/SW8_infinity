@@ -111,9 +111,9 @@ export const signup = () => {
     if (!radioCheckValidation(consent1) || !radioCheckValidation(consent2)) {
       alert('이용약관에 동의하세요');
     }
-
+    const base64phoneNum = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(phoneNumber));
+    const base64detailAddress = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse($detailAddress.value));
     // 데이터 패칭 후
-
     const postData = {
       id: $idInput.value,
       pwd: CryptoJS.SHA256($passwordInput.value).toString(),
@@ -121,11 +121,12 @@ export const signup = () => {
       email: $emailInput.value,
       zipCode: $postCode.value,
       address: $roadAddress.value,
-      detailAddress: $detailAddress.value,
-      phoneNum: phoneNumber
+      detailAddress: base64detailAddress,
+      phoneNum: base64phoneNum
     };
 
     const dataJson = JSON.stringify(postData);
+    console.log(dataJson);
 
     const res = await fetch(`${BASE_URI}/api/users`, {
       method: 'POST',

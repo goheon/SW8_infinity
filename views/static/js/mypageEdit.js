@@ -46,9 +46,11 @@ export const mypageEdit = () => {
     })
     .then((userData) => {
       // 사용자 정보 처리
-      const { name, email, id, phoneNum, zipCode, address, detailAddress } =
+      let { name, email, id, phoneNum, zipCode, address, detailAddress } =
         userData;
-
+      
+      detailAddress = CryptoJS.enc.Base64.parse(detailAddress).toString(CryptoJS.enc.Utf8);
+      phoneNum = CryptoJS.enc.Base64.parse(phoneNum).toString(CryptoJS.enc.Utf8);
       const first = phoneNum.substring(0, 3);
       const second = phoneNum.substring(3, 7);
       const third = phoneNum.substring(7);

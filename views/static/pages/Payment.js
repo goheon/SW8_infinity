@@ -9,7 +9,7 @@ export default class extends AbstractView {
 
   async getHtml() {
      //주문 정보 요청
-  const res = await fetch(`${BASE_URI}/api/payments?${this.params.orderNum}`, {
+  const res = await fetch(`${BASE_URI}/api/payments?orderNum=${this.params.orderNum}`, {
     method: 'GET'
   });
   const targetOrder = await res.json();
@@ -25,11 +25,12 @@ export default class extends AbstractView {
     }
   );
   const prods = await prodRes.json();
-
+  const orderPhoneNum = CryptoJS.enc.Base64.parse(targetOrder.orderPhoneNum).toString(CryptoJS.enc.Utf8);
+  const orderDetailAddress = CryptoJS.enc.Base64.parse(targetOrder.orderDetailAddress).toString(CryptoJS.enc.Utf8);
   //핸드폰번호 포맷 설정
-  const first = targetOrder.orderPhoneNum.substring(0, 3);
-  const second = targetOrder.orderPhoneNum.substring(3, 7);
-  const third = targetOrder.orderPhoneNum.substring(7);
+  const first = orderPhoneNum.substring(0, 3);
+  const second = orderPhoneNum.substring(3, 7);
+  const third = orderPhoneNum.substring(7);
   const formedOrderPhoneNum = `${first}-${second}-${third}`;
   /**
    * 주문 내 상품 처리
@@ -96,7 +97,7 @@ export default class extends AbstractView {
                     <div class="order__item__area">
                         <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
                             <li>
-                                <input type="radio" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="(${targetOrder.orderZipCode}) ${targetOrder.orderAddress} ${targetOrder.orderDetailAddress}" checked="">
+                                <input type="radio" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="(${targetOrder.orderZipCode}) ${targetOrder.orderAddress} ${targetOrder.orderDetailAddress}">
                                 <label for="delivery_choice_0">주문정보 배송지</label>
                             </li>
                             <li>
@@ -117,38 +118,13 @@ export default class extends AbstractView {
                 </li>
                 <li class="order__item delivery__item__info">
                     <span class="order__item__label">주소</span>
-                    <div class="order__item__area" id="delivery-addr">(${targetOrder.orderZipCode}) ${targetOrder.orderAddress} ${targetOrder.orderDetailAddress}</div>
+                    <div class="order__item__area" id="delivery-addr">(${targetOrder.orderZipCode}) ${targetOrder.orderAddress} ${orderDetailAddress}</div>
                 </li> 
                 <li class="order__item order__item--overflow delivery__item__info">
                     <span class="order__item__label">배송 요청사항</span>
                     <div class="order__item__area order__item__area--column">
                         <div class="order__select-wrap">
-                            <select class="order__select" name="dlv_selectbox" id="dlv_selectbox" onchange="showEtc(this.value);">
-                                                            <option value="" selected="selected">
-                                    배송 시 요청사항을 선택해주세요
-                                </option>
-                                                            <option value="부재 시 경비실에 맡겨주세요">
-                                    부재 시 경비실에 맡겨주세요
-                                </option>
-                                                            <option value="부재 시 택배함에 넣어주세요">
-                                    부재 시 택배함에 넣어주세요
-                                </option>
-                                                            <option value="부재 시 집 앞에 놔주세요">
-                                    부재 시 집 앞에 놔주세요
-                                </option>
-                                                            <option value="배송 전 연락 바랍니다">
-                                    배송 전 연락 바랍니다
-                                </option>
-                                                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">
-                                    파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.
-                                </option>
-                                                            <option value="etc">
-                                    직접 입력
-                                </option>
-                                                        </select>
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="order__select__svg">
-                                <path d="M3 6.60001L8.99965 12.6L15 6.60001" stroke="black"></path>
-                            </svg>
+                        ${targetOrder.orderReq}
                         </div>
                         <textarea class="order__textarea" name="etc_textarea" id="etc_textarea" style="display:none" maxlength="50" onkeyup="return textarea_maxlength(this)" placeholder="최대 50자까지 입력 가능합니다."></textarea>
                     </div>

@@ -2,6 +2,7 @@ import { BASE_URI } from './constant/url.js';
 import { navigateTo } from '../../router/index.js';
 import { getCookie } from './lib/getCookie.js';
 import { ExecDaumPostcode } from './lib/daumPostCode.js';
+import { clearCart } from './lib/shoppingcart.js';
 
 export const orderCreate = async () => {
   const cookie = getCookie('token');
@@ -31,9 +32,13 @@ export const orderCreate = async () => {
     }
   });
   //회원 정보 setting
-  const userInfo = await findUserRes.json();
+  let userInfo = await findUserRes.json();
   document.querySelector('#delivery-choice-1').innerHTML =
     `${userInfo.name}님 배송지`;
+
+  userInfo.phoneNum = CryptoJS.enc.Base64.parse(userInfo.phoneNum).toString(CryptoJS.enc.Utf8);
+  userInfo.detailAddress = CryptoJS.enc.Base64.parse(userInfo.detailAddress).toString(CryptoJS.enc.Utf8);
+  
   const first = userInfo.phoneNum.substring(0, 3);
   const second = userInfo.phoneNum.substring(3, 7);
   const third = userInfo.phoneNum.substring(7);
@@ -177,8 +182,10 @@ export const orderCreate = async () => {
         alert('주문정보 추가에 실패했습니다.');
         throw new Error('주문정보 추가에 실패했습니다.');
       } else {
+        //주문 완료 후 장바구니 초기화
+        clearCart();
         response.json();
-        alert('주문정보 추가에 성공하였습니다.');
+        alert('주문이 완료되었습니다.');
         navigateTo(BASE_URI);
       }
     });
@@ -277,7 +284,7 @@ export const orderCreate = async () => {
         throw new Error('주문정보 추가에 실패했습니다.');
       } else {
         response.json();
-        alert('주문정보 추가에 성공하였습니다.');
+        alert('주문이 완료되었습니다.');
         navigateTo(BASE_URI);
       }
     });

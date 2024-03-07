@@ -12,7 +12,7 @@ const ObjectId = require('mongodb').ObjectId;
 /**
  * 작성자 : 이고헌
  * 작성시작일 : 2024.02.23
- * 한 아이디가 갖는 주문 목록을 모두 조회해 오는 API, Base64로 저장된 주문자 상세 주소, 주문자 핸드폰 번호를 Decode해서 json으로 전달
+ * 한 아이디가 갖는 주문 목록을 모두 조회해 오는 API
  */
 
 router.get(
@@ -22,7 +22,7 @@ router.get(
     const { userId } = req.query;
     const orders = await Orders.find({
       $and: [{ orderId: userId }, { orderDeleteDate: { $exists: false } }]
-    });
+    }).sort({_id:-1});
     //요청 유저와 정보 유저가 동일하지 않은 경우, 어드민 제외
     if (!req.user.roleId) {
       if (req.user.id !== userId) {
@@ -200,7 +200,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const { orderProds } = req.query;
     const prodNums = orderProds.split(',');
-    console.log(prodNums) // 쉼표로 구분된 문자열을 배열로 분할하여 prodNums에 할당
+    // 쉼표로 구분된 문자열을 배열로 분할하여 prodNums에 할당
     const products = await Product.find({
       $and: [{ _id: { $in: prodNums } }, { prodUseYn: { $exists: false } }]
     });

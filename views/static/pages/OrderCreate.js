@@ -1,7 +1,7 @@
 import AbstractView from './AbstractView.js';
 import { BASE_URI } from '../js/constant/url.js';
 
-function fetchDataFromIndexedDB() {
+  function fetchDataFromIndexedDB() {
   return new Promise((resolve, reject) => {
     let request = indexedDB.open('cartDB', 1);
     request.onsuccess = async function (e) {
