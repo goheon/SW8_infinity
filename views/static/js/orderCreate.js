@@ -32,9 +32,13 @@ export const orderCreate = async () => {
     }
   });
   //회원 정보 setting
-  const userInfo = await findUserRes.json();
+  let userInfo = await findUserRes.json();
   document.querySelector('#delivery-choice-1').innerHTML =
     `${userInfo.name}님 배송지`;
+
+  userInfo.phoneNum = CryptoJS.enc.Base64.parse(userInfo.phoneNum).toString(CryptoJS.enc.Utf8);
+  userInfo.detailAddress = CryptoJS.enc.Base64.parse(userInfo.detailAddress).toString(CryptoJS.enc.Utf8);
+  
   const first = userInfo.phoneNum.substring(0, 3);
   const second = userInfo.phoneNum.substring(3, 7);
   const third = userInfo.phoneNum.substring(7);

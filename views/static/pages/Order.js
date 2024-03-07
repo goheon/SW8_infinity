@@ -23,7 +23,7 @@ export default class extends AbstractView {
     let orderRows = ''; // 주문 행을 저장할 변수 선언
 
     for (const order of orderData) {
-      const orderDetailAddress = order.orderDetailAddress;
+      const orderDetailAddress = CryptoJS.enc.Base64.parse(order.orderDetailAddress).toString(CryptoJS.enc.Utf8);
       const prodNums = order.orderProds.map((prod) => prod.prodNum).join(','); // 배열을 문자열로 변환하여 조인
       const orderProdCounts = order.orderProds.map(
         (prod) => prod.orderProdCount
@@ -84,7 +84,7 @@ export default class extends AbstractView {
           <td>${prodSum}원(${orderSum}개)</td>
           <td>
             <div>
-              <a class="delivery-btn-status ${orderStatusClass}" href="${BASE_URI}/payment/orderNum=${orderNumId}">${order.orderState}</a>
+              <a class="delivery-btn-status ${orderStatusClass}" href="${BASE_URI}/payment/${orderNumId}">${order.orderState}</a>
             </div>
           </td>
         </tr>
