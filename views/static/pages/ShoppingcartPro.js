@@ -76,7 +76,7 @@ export default class extends AbstractView {
       </table>
     </div>
     <div class="order">
-      <a href="#" class="all_product" data-link>전체상품주문</a>
+      <a href="/order/create" class="all_product" data-link>전체상품주문</a>
       <a href="#" class="select_product" data-link>선택상품주문</a>
     </div>
     <div class="product_all"></div>

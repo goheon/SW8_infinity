@@ -9,6 +9,7 @@ import { mypageEdit } from '../static/js/mypageEdit.js';
 import { order } from '../static/js/order.js';
 import { orderCompleted } from '../static/js/orderCompleted.js';
 import { orderEdit } from '../static/js/orderEdit.js';
+import { orderCreate } from '../static/js/orderCreate.js';
 import { payment } from '../static/js/payment.js';
 import { product } from '../static/js/product.js';
 import { shoppingcartPro } from '../static/js/shoppingcartPro.js';
@@ -31,6 +32,7 @@ import MypageEdit from '../static/pages/MypageEdit.js';
 import Order from '../static/pages/Order.js';
 import OrderCompleted from '../static/pages/OrderCompleted.js';
 import OrderEdit from '../static/pages/OrderEdit.js';
+import OrderCreate from '../static/pages/OrderCreate.js';
 import Payment from '../static/pages/Payment.js';
 import Product from '../static/pages/Product.js';
 import ShoppingcartPro from '../static/pages/ShoppingcartPro.js';
@@ -41,19 +43,20 @@ export const routes = [
   { Path: '/login', View: Login, Script: login },
   { Path: '/signup', View: Signup, Script: signup },
   { Path: '/product/:prodId', View: Product, Script: product },
-  { Path: '/order', View: Order, Script: order },
+  { Path: '/order-list', View: Order, Script: order },
   { Path: '/shoppingCart', View: ShoppingcartPro, Script: shoppingcartPro },
   {
     Path: '/categorys/:categoryProducts',
     View: CategoryProducts,
     Script: categoryProducts
   },
-  { Path: '/orderCompleted', View: OrderCompleted, Script: orderCompleted },
+  { Path: '/order/complete', View: OrderCompleted, Script: orderCompleted },
   { Path: '/error', View: ErrorPage, Script: errorFnc },
   { Path: '/mypage', View: Mypage, Script: mypage },
   { Path: '/payment/:orderNum', View: Payment, Script: payment },
-  { Path: '/mypageEdit', View: MypageEdit, Script: mypageEdit },
-    { Path: '/orderEdit', View: OrderEdit, Script: orderEdit },
+  { Path: '/mypage/edit', View: MypageEdit, Script: mypageEdit },
+  { Path: '/order/edit/:orderNum', View: OrderEdit, Script: orderEdit },
+  { Path: '/order/create', View: OrderCreate, Script: orderCreate },
   { Path: '/admin', View: Admin, Script: admin },
   {
     Path: '/admin/adminManagement',
@@ -70,6 +73,5 @@ export const routes = [
     Path: '/admin/adminProductList',
     View: AdminProductList,
     Script: adminProductList
-  },
-  { Path: '/orderEdit/:orderNum', View: OrderEdit, Script: orderEdit }
+  }
 ];
