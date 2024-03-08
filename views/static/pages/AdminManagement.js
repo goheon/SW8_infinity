@@ -20,7 +20,14 @@ export default class extends AbstractView {
           <td colspan="2">상품</td>
           <td>39,000원</td>
           <td>${order.orderId}</td>
-          <td>${order.orderState === '처리전' ? '배송중' : order.orderState}</td>
+          <td>
+            <select>
+              <option value="confirmPaid">결제 확인</option>
+              <option value="preSet">배송 준비중</option>
+              <option value="onGoing">배송중</option>
+              <option value="complete">배송완료</option>
+            </select>
+          </td>
           <td>${new Intl.DateTimeFormat('ko-kr').format(new Date(order.orderDate))}</td>
           <td>카드결제</td>
           <td>${index + 1}</td>
@@ -105,10 +112,10 @@ export default class extends AbstractView {
                 </tbody>
               </table>
             </div>
-            <!--<div class="change">
+            <div class="change">
               <a href="#" class="applyChange" data-link>변경사항 적용</a>
               <a href="#" class="cancel" data-link>취소</a>
-            </div>-->
+            </div>
           </div>
         </div>
       </div>
