@@ -113,7 +113,13 @@ export const adminManagement = async () => {
       $orderRow.innerHTML += `
         <td>${order.orderId}</td>
         <td>
-        ${order.orderState === '처리전' ? '배송중' : order.orderState}
+          <select>
+            <option value="preConfirm">처리전</option>
+            <option value="confirmPaid">결제 확인</option>
+            <option value="preSet">배송 준비중</option>
+            <option value="onGoing">배송중</option>
+            <option value="complete">배송완료</option>
+          </select>
         </td>
         <td>${$orderDate}</td>
         <td>카드결제</td>

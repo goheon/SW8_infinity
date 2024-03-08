@@ -68,8 +68,8 @@ aside {
   width: 100%;
 }
 .adminTable {
-  width: 80%;
-  margin-top: 70px;
+  width: 90%;
+  margin-top: 30px;
   margin-bottom: 30px;
   text-align: center;
   font-size: 14px;
@@ -145,4 +145,17 @@ aside {
   font-weight: bold;
   text-decoration: underline;
   color: #3c3c3c;
+}
+.search-field {
+  margin-top: 30px;
+  margin-left: 65%;
+  padding: 0 auto;
+}
+.orderId {
+  width: 200px;
+  margin : 0 auto;
+}
+.orderId {
+  width: 150px;
+  height: 30px;
 }
