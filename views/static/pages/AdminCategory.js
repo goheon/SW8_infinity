@@ -8,40 +8,43 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
-    const res = await fetch(`${BASE_URI}/api/category`, {
-      method: 'GET'
-    });
-    const categoriesData = await res.json();
-    let categories = ``;
+    // 버튼 템플릿 문자열 정의
+    // const buttonTemplate = `
+    //   <button class="button is-link edit-product">추가</button>
+    //   <button class="button is-success edit-product">수정</button>
+    //   <button class="button is-black edit-product">삭제</button>
+    // `;
+
+    // const res = await fetch(`${BASE_URI}/api/category`, {
+    //   method: 'GET'
+    // });
+    // const categoriesData = await res.json();
+    // let categories = ``;
     //대분류 생성
-    for (let majorCategory of categoriesData) {
-      categories += `<form action="" class="form-box">
-      <div class="ct-box" id="ct-${majorCategory.prodMajorCategory}">
-        <span class="ct-product">${majorCategory.prodMajorCategory}</span>
-        <div class="ct-button-box">
-          <button class="button is-link edit-product">추가</button>
-          <button class="button is-success edit-product">수정</button>
-          <button class="button is-black edit-product">삭제</button>
-        </div>
-      </div>
-    </form>
+    // for (let majorCategory of categoriesData) {
+    //   categories += `<form action="" class="form-box">
+    //   <div class="ct-box" id="ct-${majorCategory.prodMajorCategory}">
+    //     <span class="ct-product">${majorCategory.prodMajorCategory}</span>
+    //     <div class="ct-button-box">
+    //       ${buttonTemplate} <!-- 버튼 템플릿 삽입 -->
+    //     </div>
+    //   </div>
+    // </form>
 
-      `;
+    //   `;
 
-      for (let subCategory of majorCategory.prodSubCategories) {
-        categories += `
-       <form action="" class="acform-box">
-      <div class="ac-box" id="ad-${subCategory.prodSubCategory}">
-        <span class="ac-product">${subCategory.prodSubCategory}</span>
-        <div class="ac-button-box">
-          <button class="button is-link edit-product">추가</button>
-          <button class="button is-success edit-product">수정</button>
-          <button class="button is-black edit-product">삭제</button>
-        </div>
-      </div>
-    </form>`;
-      }
-    }
+    //   for (let subCategory of majorCategory.prodSubCategories) {
+    //     categories += `
+    //    <form action="" class="acform-box">
+    //   <div class="ac-box" id="ad-${subCategory.prodSubCategory}">
+    //     <span class="ac-product">${subCategory.prodSubCategory}</span>
+    //     <div class="ac-button-box">
+    //       ${buttonTemplate} <!-- 버튼 템플릿 삽입 -->
+    //     </div>
+    //   </div>
+    // </form>`;
+    //   }
+    // }
 
     return `
     <div class="columns">
@@ -73,11 +76,11 @@ export default class extends AbstractView {
           <span class="name">상품</span>
         </a>
         <a href="/admin/adminProductSetting" class="item" data-link>
-        <span class="icon">
-          <i class="fa fa-folder-o"></i>
-        </span>
-        <span class="name">상품 생성하기</span>
-      </a>
+          <span class="icon">
+            <i class="fa fa-folder-o"></i>
+          </span>
+          <span class="name">상품 생성하기</span>
+        </a>
         <a href="/admin/adminManagement" class="item" data-link>
           <span class="icon">
             <i class="fa fa-inbox"></i>
@@ -87,21 +90,22 @@ export default class extends AbstractView {
       </div>
     </div>
   </aside>
-    <div class="column messages hero is-fullheight">
-    <div class="admin-ct-title">
-    <h2>카테고리</h2>
-  </div>
-  <div class="admin-ct-all">
-    <div class="admin-ct-control-btn">
-      <button class="button is-link con-add">추가</button>
-    </div>
-    ${categories}
-   </div>
-    
-    <div class="admin-ct-applybtn">
-      <button class="button is-link edit-apply">변경 사항 적용</button>
-      <button class="button is-black cancle-apply">취소</button>
-    </div>
+    <div class="column messages is-fullheight">
+      <div class="admin-ct-title">
+        <h2>카테고리</h2>
+      </div>
+      <!--이곳에내용추가-->
+      <div class="admin-ct-all">
+        <div class="admin-ct-control-btn">
+          <button class="button is-link con-add">추가</button>
+        </div>
+        <div class="admin-ct-all-content">
+        </div>
+      </div>
+      <div class="admin-ct-applybtn">
+        <button class="button is-link edit-apply">변경 사항 적용</button>
+        <button class="button is-black cancle-apply">취소</button>
+      </div>
   </div>
 </div>
 </div>
