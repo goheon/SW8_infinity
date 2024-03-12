@@ -26,6 +26,14 @@ const orderSchema = new Schema({
           type: Schema.Types.ObjectId,
           required: true
         },
+        prodName: {
+          type: String,
+          required: true,
+        },
+        prodCost: {
+          type: Number,
+          required: true 
+        },
         orderProdCount: {
           type: Number,
           required: true

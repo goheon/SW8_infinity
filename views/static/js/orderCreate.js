@@ -156,10 +156,18 @@ export const orderCreate = async () => {
       //주문상품목록담기
       const $prod_count = document.querySelectorAll('.prod_count');
       const $prod_num = document.querySelectorAll('.prod_num');
+      const $prod_name = document.querySelectorAll('.prod_name').textContent;
+      const $prod_cost = document.querySelectorAll('.prod_cost').textContent;
+
+      console.log($prod_name);
+      console.log($prod_cost);
+
       let orderProds = [];
       for (let i = 0; i < $prod_count.length; i++) {
         orderProds.push({
           prodNum: $prod_num[i].innerHTML,
+          prodName: $prod_name[i].innerText,
+          $prod_cost: Number($prod_cost[i].innerHTML),
           orderProdCount: $prod_count[i].innerHTML
         });
       }
@@ -249,10 +257,18 @@ export const orderCreate = async () => {
       //주문상품목록담기
       const $prod_count = document.querySelectorAll('.prod_count');
       const $prod_num = document.querySelectorAll('.prod_num');
+      const $prod_name = document.querySelectorAll('.prod_name');
+      const $prod_cost = document.querySelectorAll('.prod_cost');
+
+      console.log($prod_name);
+      console.log($prod_cost);
+
       let orderProds = [];
       for (let i = 0; i < $prod_count.length; i++) {
         orderProds.push({
           prodNum: $prod_num[i].innerHTML,
+          prodName: $prod_name[i].innerText,
+          prodCost: Number($prod_cost[i].innerHTML),
           orderProdCount: $prod_count[i].innerHTML
         });
       }

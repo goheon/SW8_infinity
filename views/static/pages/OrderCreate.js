@@ -89,7 +89,7 @@ export default class extends AbstractView {
                       [자체 제작]
                   </strong><br/>
                   <span class="list_info">
-                      <a href="/product/${prod._id}" target="_blank">${prod.prodName}</a>
+                      <a class="prod_name" href="/product/${prod._id}" target="_blank">${prod.prodName}</a>
                   </span>
                   <br>
                   <span class="list_info" style="display:none">
@@ -106,6 +106,7 @@ export default class extends AbstractView {
           <span class="box_normal-dlv-amt">무료</span>
       </td>
       <td class="price">
+          <span class="prod_cost" style="display:none">${prod.prodCost}</span>
           <strong>${(prod.prodCost * orderProdCount).toLocaleString()} 원</strong>
       </td>
   </tr>
