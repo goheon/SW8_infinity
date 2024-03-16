@@ -63,7 +63,7 @@ export const product = async () => {
         id: nextKey,
         prodNum: prodNum.innerHTML,
         count: 1
-      });
+      }, 'increase');
       await getCartItems(totalCalc);
       return;
     }
@@ -117,9 +117,9 @@ export const product = async () => {
   });
   const updateCartItemList = async (prod, type) => {
     const $results = document.querySelector('.result');
-    console.log(type)
+
     const result = await addItemToCart(prod, type);
-    // 상품이 존재하는 체크 후 increase인 경우 html +1
+    // 상품 체크 후 increase인 경우 html +1
     if (result?.check && type ==='increase') {
       const product = await getCartItemByKey(result.id);
       const $result = document.getElementById(result.id);
@@ -166,7 +166,8 @@ export const product = async () => {
         </div>
     </li>
     `;
-    //추가된 상품의 이벤트 리스너 등록 오류났음
+    // 같은 상품을 장바구니에 담았을 때 검사 후 인덱스디비 안에서 추가해야 함
+
     $results.append(newProd);
     const addedProd = $results.lastChild
   

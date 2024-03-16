@@ -35,7 +35,7 @@ export const addItemToCart = async (item, type) => {
   await openDatabase();
 
   const existingItem = await checkCartItem(item);
-  console.log(existingItem)
+
   if (existingItem  && type==='increase') {
     // 이미 장바구니에 있는 상품인 경우
     existingItem.count += 1; // 수량 증가
@@ -46,7 +46,7 @@ export const addItemToCart = async (item, type) => {
     return await updateCartItem(existingItem);
 
   } else {
-    // 장바구니에 없는 상품인 경우
+    // 장바구니에 없는 상품인 경우 indexedDB 등록
     const transaction = db.transaction(['cart'], 'readwrite');
     const objectStore = transaction.objectStore('cart');
     const request = await objectStore.add(item);
@@ -88,7 +88,7 @@ const checkCartItem = async (item) => {
   });
 };
 
-// 장바구니에 있는 상품의 수량을 업데이트하는 함수
+// indexedDB 장바구니에 있는 상품의 수량을 업데이트하는 함수
 const updateCartItem = async (item) => {
   await openDatabase();
   const transaction = db.transaction(['cart'], 'readwrite');
