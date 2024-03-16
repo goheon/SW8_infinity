@@ -179,3 +179,7 @@
 .no-cart {
   text-align: center;
 }
+
+.result-number {
+  margin-left: .5rem;
+}

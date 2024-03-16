@@ -31,15 +31,20 @@ export const openDatabase = async () => {
 };
 
 // 장바구니에 아이템 추가
-export const addItemToCart = async (item) => {
+export const addItemToCart = async (item, type) => {
   await openDatabase();
 
   const existingItem = await checkCartItem(item);
-
-  if (existingItem) {
+  console.log(existingItem)
+  if (existingItem  && type==='increase') {
     // 이미 장바구니에 있는 상품인 경우
     existingItem.count += 1; // 수량 증가
+    return await updateCartItem(existingItem, type);
+
+  } else if (existingItem  && type==='decrease') {
+    existingItem.count -= 1; // 수량 감소
     return await updateCartItem(existingItem);
+
   } else {
     // 장바구니에 없는 상품인 경우
     const transaction = db.transaction(['cart'], 'readwrite');
