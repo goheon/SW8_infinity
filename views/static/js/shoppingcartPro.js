@@ -2,7 +2,6 @@ import {
   getCartItemByKey,
   getCartItems,
   removeItemFromCart,
-  updateCart
 } from './lib/shoppingcart.js';
 
 export const shoppingcartPro = async (type) => {
