@@ -4,6 +4,8 @@ import {
   removeItemFromCart,
 } from './lib/shoppingcart.js';
 
+//장바구니 상품 +, - 버튼 기능, 체크박스 선택 상품 삭제 기능, 상품 별 삭제하기 버튼 기능 
+
 export const shoppingcartPro = async (type) => {
   //  데이터 초반 로딩
   await loadShopppingCart();
@@ -11,12 +13,14 @@ export const shoppingcartPro = async (type) => {
   const $products = document.querySelectorAll('.tr2');
   $products.forEach((prod, index, array) => {
     prod.addEventListener('click', async (event) => {
+      event.preventDefault();
       const tr2 = document.querySelector('.tbody>.tr2');
       const $count = prod.querySelector('#result');
       const $prodPrice = prod.querySelector('.prodPrice');
       let id = parseInt(prod.querySelector('.img').alt);
 
       const prodCart = await getCartItemByKey(id); // 장바구니
+
       // 장바구니 +1
       if (event.target.className === 'plus') {
         await updateCart(id, parseInt($count.innerHTML) + 1);
