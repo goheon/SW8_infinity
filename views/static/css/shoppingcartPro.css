@@ -52,7 +52,7 @@
   height: 40px;
 }
 
-.tr1 .th1 {
+.tr1 .th {
   width: 70px;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .tr1 .th3 {
-  width: 337px;
+  width: 150px;
 }
 
 .tr1 .th4 {
@@ -89,7 +89,7 @@
 }
 
 .tr2_td1 {
-  width: 457px;
+  width: 250px;
 }
 
 .tr3 {
@@ -105,11 +105,9 @@
 }
 
 .product_infor {
-  display: flex;
   padding: 10px;
   align-items: center;
   gap: 50px;
-  margin-left: 25px;
 }
 
 .img {

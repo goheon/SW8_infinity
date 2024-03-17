@@ -93,16 +93,21 @@ const createElement = (categoryProd) => {
       'afterbegin',
       `
         <tr class="tr2">
-        <td colspan="3" class="tr2_td1">
-          <div class="product_infor">
-            <input type="checkbox" id="checkbox2" /><img
-              alt=${product.id}
-              src=${product.src || 'http://34.47.86.42:3000/static/images/product/452140f0091654da13168df50481dc70.webp'}
-              class="img"
-            />
-            <p class="productName">${product.name}</p>
-          </div>
+        <td class="tr2_td">
+          <input type="checkbox" />
         </td>
+        <td class="tr2_td1">
+            <div class="product_infor">
+              <img
+                alt=${product.id}
+                src=${product.src || 'http://34.47.86.42:3000/static/images/product/452140f0091654da13168df50481dc70.webp'}
+                class="img"
+              />
+            </div>
+        </td>
+          <td>
+            <p class="productName">${product.name}</p>
+          </td>
         <td>
           <input
             type="button"

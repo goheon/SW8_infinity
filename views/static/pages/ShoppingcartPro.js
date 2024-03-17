@@ -27,18 +27,18 @@ export default class extends AbstractView {
     <div class="cart_product">
       <table class="cart_table">
         <caption class="caption">
-          일반상품[1]
+          장바구니
         </caption>
         <thead>
           <tr class="tr1">
-            <th class="th1"><input type="checkbox" id="checkbox1" /></th>
-            <th class="th2">이미지</th>
-            <th class="th3">상품정보</th>
-            <th class="th4">수량</th>
-            <th class="th5">상품금액</th>
-            <th class="th6">배송구분</th>
-            <th class="th7">배송비</th>
-            <th class="th8">선택</th>
+          <th class="th"><input type="checkbox" id="checkbox1" /></th>
+          <th class="th1">이미지</th>
+          <th class="th2">상품정보</th>
+            <th class="th3">수량</th>
+            <th class="th4">상품금액</th>
+            <th class="th5">배송구분</th>
+            <th class="th6">배송비</th>
+            <th class="th7">선택</th>
           </tr>
         </thead>
         <tbody class="tbody">
