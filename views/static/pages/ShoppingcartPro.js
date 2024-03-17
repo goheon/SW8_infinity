@@ -51,18 +51,14 @@ export default class extends AbstractView {
         </tr>
         </tbody>
       </table>
+      <a
+        href="#"
+        class="delete2"
+      >선택 삭제</a>
       <p class="discount_guide">
         ❗️ 할인 적용 금액은 주문서작성의 결제예정금액에서 확인 가능합니다
       </p>
       <hr width="100%" />
-      <h2 style="font-size: 15px">
-        선택상품을<a
-          href="#"
-          class="delete2"
-          style="margin: 0 0 5px 15px"
-          >삭제하기</a
-        >
-      </h2>
       <table class="price_table">
         <thead>
           <tr>
