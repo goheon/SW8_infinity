@@ -268,3 +268,42 @@ export const clearCart = () => {
       };
   });
 }
+
+export const updateCart = async (id, count) => {
+  await openDatabase();
+  const transaction = db.transaction(['cart'], 'readwrite');
+  const objectStore = transaction.objectStore('cart');
+  const request = objectStore.get(id);
+
+  request.onerror = function (event) {
+    console.error('Error in getting product:', event.target.error);
+  };
+  let temp;
+  const product = await new Promise((resolve, reject) => {
+    request.onerror = function (event) {
+      console.error('Error in getting product:', event.target.error);
+      reject(event.target.error);
+    };
+
+    request.onsuccess = function (event) {
+      temp = event.target.result;
+      resolve(event.target.result);
+    };
+  });
+
+  const updateRequest = await objectStore.put({
+    ...temp,
+    count
+  });
+
+  await new Promise((resolve, reject) => {
+    updateRequest.onerror = function (event) {
+      console.error('Error in updating product:', event.target.error);
+      reject(event.target.error);
+    };
+
+    updateRequest.onsuccess = function (event) {
+      resolve(event.target.result);
+    };
+  });
+};

@@ -5,6 +5,7 @@ import {
   getCartItems,
   getNextKey,
   removeItemFromCart,
+  totalCountCalc
 } from './lib/shoppingcart.js';
 
 export const product = async () => {
@@ -52,6 +53,7 @@ export const product = async () => {
     $totalPrice.innerHTML = totalPrice.toLocaleString();
   };
 
+  //상품 추가 버튼 이벤트 리스너
   $addProductBtn.addEventListener('click', async () => {
     if ($color.value !== '선택해주세요' && $size.value !== '선택해주세요') {
       const nextKey = await getNextKey();
@@ -65,6 +67,7 @@ export const product = async () => {
         count: 1
       }, 'increase');
       await getCartItems(totalCalc);
+      await totalCountCalc();
       return;
     }
     alert('선택해주세요');
@@ -95,7 +98,6 @@ export const product = async () => {
         if (product.count <= 1) {
           await removeItemFromCart(parseInt(prod.id));
           prod.remove();
-          await getCartItems(totalCalc);
           return;
         }
         await updateCartItemList({
@@ -110,6 +112,7 @@ export const product = async () => {
         await removeItemFromCart(parseInt(prod.id));
         prod.remove();
         await getCartItems(totalCalc);
+        await totalCountCalc();
         return;
       }
       await getCartItems(totalCalc);
@@ -119,24 +122,21 @@ export const product = async () => {
     const $results = document.querySelector('.result');
 
     const result = await addItemToCart(prod, type);
+    const product = await getCartItemByKey(result.id);
+    const $result = document.getElementById(result.id);
+
     // 상품 체크 후 increase인 경우 html +1
     if (result?.check && type ==='increase') {
-      const product = await getCartItemByKey(result.id);
-      const $result = document.getElementById(result.id);
       const $quantity = $result.querySelector('.quantity');
       const $resultNumber = $result.querySelector('.result-number');
-  
       $quantity.innerHTML = parseInt($quantity.innerHTML) + 1;
       $resultNumber.innerHTML = `${(product.price * product.count).toLocaleString()} ₩`;
       return;
     }
     //상품 체크 후 decrease 인 경우 html에서 -1
     if (result?.check && type ==='decrease') {
-      const product = await getCartItemByKey(result.id);
-      const $result = document.getElementById(result.id);
       const $quantity = $result.querySelector('.quantity');
       const $resultNumber = $result.querySelector('.result-number');
-  
       $quantity.innerHTML = parseInt($quantity.innerHTML) - 1;
       $resultNumber.innerHTML = `${(product.price * product.count).toLocaleString()} ₩`;
       return;
@@ -208,6 +208,7 @@ export const product = async () => {
         await removeItemFromCart(parseInt(addedProd.id));
         addedProd.remove();
         await getCartItems(totalCalc);
+        await totalCountCalc();
         return;
       }
       await getCartItems(totalCalc);

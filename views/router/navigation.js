@@ -1,6 +1,7 @@
 import { categorysEnum } from '../static/js/constant/categorys.js';
 import { BASE_URI } from '../static/js/constant/url.js';
 import { getCookie } from '../static/js/lib/getCookie.js';
+
 export const rightbar = async () => {
   const $rightBar = document.getElementById('rightbar');
   const $leftBar = document.querySelector('.menu-list');
@@ -91,6 +92,6 @@ export const rightbar = async () => {
       'token' + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     window.location.reload();
   });
-
+  
   return;
 };
