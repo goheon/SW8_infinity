@@ -27,18 +27,18 @@ export default class extends AbstractView {
     <div class="cart_product">
       <table class="cart_table">
         <caption class="caption">
-          일반상품[1]
+          장바구니
         </caption>
         <thead>
           <tr class="tr1">
-            <th class="th1"><input type="checkbox" id="checkbox1" /></th>
-            <th class="th2">이미지</th>
-            <th class="th3">상품정보</th>
-            <th class="th4">수량</th>
-            <th class="th5">상품금액</th>
-            <th class="th6">배송구분</th>
-            <th class="th7">배송비</th>
-            <th class="th8">선택</th>
+          <th class="th"><input type="checkbox" id="checkbox1" /></th>
+          <th class="th1">이미지</th>
+          <th class="th2">상품정보</th>
+            <th class="th3">수량</th>
+            <th class="th4">상품금액</th>
+            <th class="th5">배송구분</th>
+            <th class="th6">배송비</th>
+            <th class="th7">선택</th>
           </tr>
         </thead>
         <tbody class="tbody">
@@ -51,18 +51,14 @@ export default class extends AbstractView {
         </tr>
         </tbody>
       </table>
+      <a
+        href="#"
+        class="delete2"
+      >선택 삭제</a>
       <p class="discount_guide">
         ❗️ 할인 적용 금액은 주문서작성의 결제예정금액에서 확인 가능합니다
       </p>
       <hr width="100%" />
-      <h2 style="font-size: 15px">
-        선택상품을<a
-          href="#"
-          class="delete2"
-          style="margin: 0 0 5px 15px"
-          >삭제하기</a
-        >
-      </h2>
       <table class="price_table">
         <thead>
           <tr>

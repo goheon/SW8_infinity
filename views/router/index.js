@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   router();
 });
+
 document.querySelector('.logo').addEventListener('click', (e) => {
   const activeItems = document.querySelectorAll('.menu-list li a.is-active');
 

@@ -31,17 +31,22 @@ export const openDatabase = async () => {
 };
 
 // 장바구니에 아이템 추가
-export const addItemToCart = async (item) => {
+export const addItemToCart = async (item, type) => {
   await openDatabase();
 
   const existingItem = await checkCartItem(item);
 
-  if (existingItem) {
+  if (existingItem  && type==='increase') {
     // 이미 장바구니에 있는 상품인 경우
     existingItem.count += 1; // 수량 증가
+    return await updateCartItem(existingItem, type);
+
+  } else if (existingItem  && type==='decrease') {
+    existingItem.count -= 1; // 수량 감소
     return await updateCartItem(existingItem);
+
   } else {
-    // 장바구니에 없는 상품인 경우
+    // 장바구니에 없는 상품인 경우 indexedDB 등록
     const transaction = db.transaction(['cart'], 'readwrite');
     const objectStore = transaction.objectStore('cart');
     const request = await objectStore.add(item);
@@ -83,7 +88,7 @@ const checkCartItem = async (item) => {
   });
 };
 
-// 장바구니에 있는 상품의 수량을 업데이트하는 함수
+// indexedDB 장바구니에 있는 상품의 수량을 업데이트하는 함수
 const updateCartItem = async (item) => {
   await openDatabase();
   const transaction = db.transaction(['cart'], 'readwrite');
@@ -156,47 +161,6 @@ export const removeItemFromCart = async (id) => {
     request.onerror = function (event) {
       console.log('Error removing item from the cart');
       reject(event.target.error);
-    };
-  });
-};
-
-// 장바구니 빼기 업데이트(레거시 코드)
-export const updateCart = async (id, count) => {
-  await openDatabase();
-  const transaction = db.transaction(['cart'], 'readwrite');
-  const objectStore = transaction.objectStore('cart');
-  const request = objectStore.get(id);
-
-  request.onerror = function (event) {
-    console.error('Error in getting product:', event.target.error);
-  };
-  let temp;
-  const product = await new Promise((resolve, reject) => {
-    request.onerror = function (event) {
-      console.error('Error in getting product:', event.target.error);
-      reject(event.target.error);
-    };
-
-    request.onsuccess = function (event) {
-      temp = event.target.result;
-      resolve(event.target.result);
-    };
-  });
-
-  const updateRequest = await objectStore.put({
-    ...temp,
-    count
-  });
-
-  await new Promise((resolve, reject) => {
-    updateRequest.onerror = function (event) {
-      console.error('Error in updating product:', event.target.error);
-      reject(event.target.error);
-    };
-
-    updateRequest.onsuccess = function (event) {
-      console.log('Product updated successfully:', product);
-      resolve(event.target.result);
     };
   });
 };
@@ -304,3 +268,42 @@ export const clearCart = () => {
       };
   });
 }
+
+export const updateCart = async (id, count) => {
+  await openDatabase();
+  const transaction = db.transaction(['cart'], 'readwrite');
+  const objectStore = transaction.objectStore('cart');
+  const request = objectStore.get(id);
+
+  request.onerror = function (event) {
+    console.error('Error in getting product:', event.target.error);
+  };
+  let temp;
+  const product = await new Promise((resolve, reject) => {
+    request.onerror = function (event) {
+      console.error('Error in getting product:', event.target.error);
+      reject(event.target.error);
+    };
+
+    request.onsuccess = function (event) {
+      temp = event.target.result;
+      resolve(event.target.result);
+    };
+  });
+
+  const updateRequest = await objectStore.put({
+    ...temp,
+    count
+  });
+
+  await new Promise((resolve, reject) => {
+    updateRequest.onerror = function (event) {
+      console.error('Error in updating product:', event.target.error);
+      reject(event.target.error);
+    };
+
+    updateRequest.onsuccess = function (event) {
+      resolve(event.target.result);
+    };
+  });
+};

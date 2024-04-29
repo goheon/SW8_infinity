@@ -4,42 +4,57 @@ import {
   removeItemFromCart,
   updateCart
 } from './lib/shoppingcart.js';
+import { BASE_URI } from '../js/constant/url.js';
+
+//장바구니 상품 +, - 버튼 기능, 체크박스 선택 상품 삭제 기능, 상품 별 삭제하기 버튼 기능 
 
 export const shoppingcartPro = async (type) => {
   //  데이터 초반 로딩
   await loadShopppingCart();
   removeCategory();
+
   const $products = document.querySelectorAll('.tr2');
+
   $products.forEach((prod, index, array) => {
     prod.addEventListener('click', async (event) => {
+      event.preventDefault();
       const tr2 = document.querySelector('.tbody>.tr2');
       const $count = prod.querySelector('#result');
       const $prodPrice = prod.querySelector('.prodPrice');
       let id = parseInt(prod.querySelector('.img').alt);
 
       const prodCart = await getCartItemByKey(id); // 장바구니
+
       // 장바구니 +1
       if (event.target.className === 'plus') {
         await updateCart(id, parseInt($count.innerHTML) + 1);
         $count.innerHTML = parseInt($count.innerHTML) + 1;
-        $prodPrice.innerHTML = prodCart.price * parseInt($count.innerHTML);
+        $prodPrice.innerHTML = `${(prodCart.price * parseInt($count.innerHTML)).toLocaleString()}₩`;
       }
 
       // 장바구니 -1
       if (event.target.className === 'minus') {
-        if (parseInt($count.innerHTML) <= 0) {
+        if (parseInt($count.innerHTML) <= 1) {
           await removeItemFromCart(id);
           tr2.remove();
+          await getCartItems(totalElement);
+          await getCartItems(paymentPrice);
           return;
         }
         await updateCart(id, parseInt($count.innerHTML) - 1);
         $count.innerHTML = parseInt($count.innerHTML) - 1;
-        $prodPrice.innerHTML = prodCart.price * parseInt($count.innerHTML);
+        $prodPrice.innerHTML = `${(prodCart.price * parseInt($count.innerHTML)).toLocaleString()}₩`;
       }
 
       if (event.target.className === 'delete_product') {
-        await removeItemFromCart(id);
-        tr2.remove();
+        //¿¿왜 remove가 안되는 건지?????????
+        // await removeItemFromCart(id);
+        // const greatGrandparentElement = event.target.parentNode.parentNode.parentNode;
+        // console.log(greatGrandparentElement);
+        // greatGrandparentElement.remove();
+
+        await getCartItems(totalElement);
+        await getCartItems(paymentPrice);
         return;
       }
       await getCartItems(totalElement);
@@ -82,28 +97,34 @@ const removeCategory = () => {
       }
     });
   };
-  $selectDeleteBtn.addEventListener('click', deleteSelectProd);
+  // $selectDeleteBtn.addEventListener('click', deleteSelectProd);
 };
 
 const allRemoveCategory = () => {};
 
 const createElement = (categoryProd) => {
+  //상품 이미지 src 수정, 
   const $tbody = document.querySelector('.tbody');
   categoryProd.map((product) => {
     $tbody.insertAdjacentHTML(
       'afterbegin',
       `
         <tr class="tr2">
-        <td colspan="3" class="tr2_td1">
-          <div class="product_infor">
-            <input type="checkbox" id="checkbox2" /><img
-              alt=${product.id}
-              src=${product.src || 'http://34.47.86.42:3000/static/images/product/452140f0091654da13168df50481dc70.webp'}
-              class="img"
-            />
-            <p class="productName">${product.name}</p>
-          </div>
+        <td class="tr2_td">
+          <input type="checkbox" />
         </td>
+        <td class="tr2_td1">
+            <div class="product_infor">
+              <img
+                alt=${product.id}
+                src=${product.src || `${BASE_URI}/static/images/product/452140f0091654da13168df50481dc70.webp`}
+                class="img"
+              />
+            </div>
+        </td>
+          <td>
+            <p class="productName">${product.name}</p>
+          </td>
         <td>
           <input
             type="button"
@@ -117,7 +138,7 @@ const createElement = (categoryProd) => {
           />
           <div id="result">${product.count}</div>
         </td>
-        <td class="prodPrice">${(product.price * product.count).toLocaleString()}</td>
+        <td class="prodPrice">${(product.price * product.count).toLocaleString()}₩</td>
         <td>기본배송</td>
         <td>무료</td>
         <td>
