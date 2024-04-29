@@ -70,30 +70,12 @@ aside {
   width: 10%;
 }
 
-.con-add {
-  float: right;
-  margin: 15px;
-  margin-right: 50px;
-  font-size: 12px;
-  width: 10%;
-}
-
-.admin-ct-all {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 168, 168, 0.13);
-}
-
 .admin-ct-title {
   font-size: 48px;
 }
 
 .ct-product {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 75%;
+  padding-left: 1rem;
   font-weight: bold;
 }
 
@@ -105,9 +87,8 @@ aside {
 .ct-box,
 .ac-box {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 630px;
+  width: 330px;
   height: 40px;
   margin: 0px;
   border-radius: 10px;
@@ -125,8 +106,6 @@ aside {
 .ac-button-box {
   position: absolute;
   right: 0;
-  display: none;
-  width: 25%;
   text-align: right;
   margin-right: 10px;
 }
@@ -137,14 +116,7 @@ aside {
 }
 
 .form-box {
-  display: flex;
   margin-top: 15px;
-}
-
-.admin-ct-applybtn {
-  display: flex;
-  justify-content: center;
-  background-color: rgba(255, 168, 168, 0.13);
 }
 
 .edit-apply {
@@ -167,15 +139,8 @@ aside {
 }
 
 .ac-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 630px;
-  height: 40px;
-  margin: 0px;
-  border-radius: 10px;
   background-color: #ffe2dc;
-  border-bottom: 1px solid;
+  margin-bottom: 4px;
 }
 
 .ac-product {
@@ -185,17 +150,11 @@ aside {
   width: 75%;
 }
 
-.ac-button-box {
-  width: 25%;
-  text-align: right;
-  margin-right: 10px;
-}
-
-.acform-box {
-  display: flex;
-  margin-left: 40px;
-}
-
 #ct-ac-checkbox {
   margin-left: 30px;
+}
+
+.new-admin-box {
+  display: flex;
+  gap: 5px;
 }

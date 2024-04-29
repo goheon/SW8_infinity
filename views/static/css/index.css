@@ -17,17 +17,6 @@
 @import url('/static/css/adminCategory.css');
 @import url('/static/css/adminProductList.css');
 
-@font-face {
-  font-family: 'hazel_mp';
-  src: url('/web/upload/hazel/hazel_mp_b.eot');
-  src:
-    url('/web/upload/hazel/hazel_mp_b.eot?#iefix') format('embedded-opentype'),
-    url('/web/upload/hazel/hazel_mp_b.ttf') format('truetype'),
-    url('/web/upload/hazel/hazel_mp_b.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-}
-
 html {
   width: 100%;
   height: 100%;
