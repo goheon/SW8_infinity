@@ -67,7 +67,10 @@ router.post(
     for (let orderProd of orderProds) {
       newOrderProds.push({
         prodNum: new ObjectId(orderProd.prodNum),
-        // prodNum: orderProd.prodNum,
+        //상품명을 받아옵니다.
+        prodName: orderProd.prodName,
+        //상품 가격을 받아옵니다.
+        prodCost: orderProd.prodCost,
         orderProdCount: Number(orderProd.orderProdCount)
       });
     }
@@ -133,7 +136,8 @@ router.put(
       for (let orderProd of orderProds) {
         newOrderProds.push({
           prodNum: new ObjectId(orderProd.prodNum),
-          // prodNum: orderProd.prodNum,
+          prodName: orderProd.prodName,
+          prodCost: orderProd.prodCost,
           orderProdCount: Number(orderProd.orderProdCount)
         });
       }

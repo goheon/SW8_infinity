@@ -14,11 +14,10 @@ export default class extends AbstractView {
     // 주문 데이터를 표시하는 HTML 생성
     const ordersHtml = this.ordersData
       .map(
-        (order, index) => `
+        (order) => `
         <tr class="adminTbodyTr2">
           <td><input type="checkbox" id="checkbox1" /></td>
-          <td colspan="2">상품</td>
-          <td>39,000원</td>
+          <td>${order._id}</td>
           <td>${order.orderId}</td>
           <td>
             <select>
@@ -30,7 +29,6 @@ export default class extends AbstractView {
           </td>
           <td>${new Intl.DateTimeFormat('ko-kr').format(new Date(order.orderDate))}</td>
           <td>카드결제</td>
-          <td>${index + 1}</td>
         </tr>
         `
       )
@@ -99,12 +97,13 @@ export default class extends AbstractView {
                 <thead class="adminThead2">
                   <tr class="adminTheadTr2">
                     <th><input type="checkbox" id="checkbox1" /></th>
-                    <th colspan="2">상품</th>
-                    <th>회원 아이디</th>
-                    <th>배송 상태</th>
-                    <th>구매 날짜</th>
-                    <th>결제 수단</th>
                     <th>주문번호</th>
+                    <th>회원아이디</th>
+                    <th>주문상품명</th>
+                    <th>구매금액</th>
+                    <th>처리상태</th>
+                    <th>구매날짜</th>
+                    <th>결제수단</th>
                   </tr>
                 </thead>
                 <tbody class="adminTbody2">
